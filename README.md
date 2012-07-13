@@ -1,6 +1,6 @@
 # metaquery
 
-A declarative breakpoint syntax. Defined in <meta>
+A declarative breakpoint syntax. Defined in `<meta>`
 
 ## Getting Started
 
@@ -34,13 +34,13 @@ In your markup:
 
 Now you'll have access to the breakpoints that you've defined in three places:
 
-* Via the CSS classes .breakpoint-<name-of-breakpoint> (shorter than media queries, no repeating yourself)
+* Via the CSS classes `.breakpoint-<name-of-breakpoint>` (shorter than media queries, no repeating yourself)
 * Via responsive image tags (use the declarative interface for defining a convention, then build with that)
 * Bind additional events in Javascript by inspecting the `MediaQueryList` objects via the `metaQuery.breakpoints` hash
 
 # Browser support / Older browsers
 
-## Note: These aren't going to work until I figure out addListener support for matchMedia.js
+## Note: These aren't going to work until I figure out addListener support for `matchMedia.js`
 
 * ~~IE < 8 doesn't support media queries. Considering using [respond.js][respond.js]~~
 * ~~Add the [matchMedia][matchMedia.js] polyfill for < Chrome 10, Firefox 6, Safari 5.1~~
@@ -54,7 +54,7 @@ I worked on a large HTML magazine that is edited by an editorial team. Each 'mod
 * [picturefill][picturefill] is the best responsive image technique I've seen… until I authored templates for a massive magazine. The syntax is too long and easy to forget. 
 * and finally, a summary of all three: a declarative interface is far nicer to use.
 
-After reading [Matt Wilcox's article], and the source of [picturefill][picturefill]
+After reading [Matt Wilcox's article], and the source of [picturefill][picturefill] I decided to get my hands dirty and have a go at a slightly better approach. 
 
 ## Contributing
 Please use [idiomatic.js][idiomatic.js] as a styleguide and take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
