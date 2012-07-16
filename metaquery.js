@@ -1,11 +1,12 @@
-(function ( window, document, undefined ) {
+(function ( window, document ) {
   window.metaQuery = {
-    breakpoints: {}
+    breakpoints: {},
+    mediaqueries: []
   };
 
   var addEventListener = window.addEventListener,
 
-  htmlClasses = function ( mq ) {
+  updateClasses = function ( mq ) {
     var name = window.metaQuery.breakpoints[mq.media],
         htmlclasses = document.getElementsByTagName( 'html' )[0].classList;
     
@@ -16,7 +17,7 @@
     }
   },
   
-  images = function ( mq ) {
+  updateImages = function ( mq ) {
     if( !mq.matches ) { return; }
 
     var name = window.metaQuery.breakpoints[mq.media], 
@@ -24,14 +25,14 @@
     
     for( var i = 0; i < images.length; i++ ) {
       var attribute = images[i].getAttribute( 'data-breakpoint-template' );
-      if( attribute ) { images[i].src = attribute.replace( /\{\{breakpoint\}\}/, name ); }
+      if( attribute ) { images[i].src = attribute.replace( '{{breakpoint}}', name ); }
     }
   },
   
   // Called when a media query changes state
   mqChange = function ( mq ) {
-    htmlClasses( mq );
-    images( mq );
+    updateClasses( mq );
+    updateImages( mq );
   },
   
   collectBreakPoints = function () {
@@ -43,6 +44,8 @@
         var name = meta[i].getAttribute( 'data' ),
             query = meta[i].getAttribute( 'media' ),
             mq = window.matchMedia( query );
+        
+        window.metaQuery.mediaqueries.push(mq);
         
         /* 
           Store using mq.media, rather than the media query set, 
@@ -56,17 +59,11 @@
     }
   };
   
-  // Public methods
-  window.metaQuery.init = collectBreakPoints;
-  
-  // Add events to re-run metaQuery
+  // Add events to run metaQuery
   addEventListener( 'DOMContentLoaded', function () {
-    window.metaQuery.init();
-    window.removeEventListener( 'load', window.metaQuery.init );
+    collectBreakPoints();
+    window.removeEventListener( 'load', collectBreakPoints );
   });
 
-  addEventListener( 'load', window.metaQuery.init );
-  
-  return window.metaQuery;
-  
+  addEventListener( 'load', collectBreakPoints );
 }( this, this.document ));
