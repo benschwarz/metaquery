@@ -18,6 +18,8 @@ In your markup:
         <meta name="breakpoint" data="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
         <meta name="breakpoint" data="tablet" media="(min-width: 600px) and (max-width: 1024px)">
         <meta name="breakpoint" data="widescreen" media="(min-width: 1024px)">
+        
+        <script src="./modernizr.min.js"></script>
   
         <style>
           .breakpoint-phone { background: red; }
@@ -27,10 +29,31 @@ In your markup:
         </style>
       </head>
       <body>
-        <img src="./images/small.jpg" data-breakpoint-template="./images/{{breakpoint}}.jpg">
+        <img src="./images/phone.jpg" data-breakpoint-template="./images/{{breakpoint}}.jpg">
       </body>
-      <script src="./metaquery.js"></script>
+      <script>
+        Modernizr.load([
+          {
+            test: window.matchMedia
+            nope: './matchmedia.min.js'
+          },
+          {
+            test: window.document.documentElement.classList,
+            nope: './classList.min.js'
+          }
+          {
+            load: './metaquery.min.js'
+          }
+        ]);
+      </script>
     </html>
+
+Dependencies:
+
+ 1. modernizr.com/download
+ 2. github.com/paulirish/matchMedia.js
+ 3. github.com/remy/polyfills/blob/master/classList.js
+ 4. metaquery!
 
 Now you'll have access to the breakpoints that you've defined in three places:
 
