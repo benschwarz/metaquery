@@ -8,11 +8,11 @@ module.exports = function(grunt) {
         dest: 'metaquery.min.js'
       }
     },
-    test: {
-      files: ['test/**/*.js']
+    qunit: {
+      all: ['test/*.html']
     },
     lint: {
-      files: ['metaquery.js', 'test/**/*.js']
+      files: ['metaquery.js']
     },
     watch: {
       files: '<config:lint.files>',
@@ -40,6 +40,6 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint min');
+  grunt.registerTask('default', 'qunit lint min');
 
 };
