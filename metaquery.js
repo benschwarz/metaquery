@@ -5,15 +5,16 @@
   };
 
   var addEventListener = window.addEventListener,
+      documentElement = document.documentElement,
 
   updateClasses = function ( mq ) {
     var name = window.metaQuery.breakpoints[mq.media],
-        htmlclasses = document.getElementsByTagName( 'html' )[0].classList;
+        breakpoint = 'breakpoint-' + name;
     
-    if( mq.matches ) {
-      htmlclasses.add( 'breakpoint-' + name  );
-    } else {
-      htmlclasses.remove( 'breakpoint-' + name  );
+    if(mq.matches) { 
+      documentElement.classList.add( breakpoint );
+    } else { 
+      documentElement.classList.remove( breakpoint ); 
     }
   },
   
