@@ -29,17 +29,13 @@ In your markup:
         </style>
       </head>
       <body>
-        <img src="./images/phone.jpg" data-breakpoint-template="./images/{{breakpoint}}.jpg">
+        <img src="./images/phone.jpg" data-mq-src="./images/[breakpoint].jpg">
       </body>
       <script>
         Modernizr.load([
           {
             test: (!!window.matchMedia),
             nope: ['./vendor/matchMedia-chuck.js']
-          },
-          {
-            test: (!!document.documentElement.classList),
-            nope: ['./vendor/classList.js']
           },
           {
             load: '../metaquery.js',
@@ -51,12 +47,11 @@ In your markup:
       </script>
     </html>
 
-Dependencies:
+Dependencies (for this example - you can run meta query without those, but beware of browser support):
 
  1. modernizr.com/download
  2. github.com/paulirish/matchMedia.js
- 3. github.com/remy/polyfills/blob/master/classList.js
- 4. metaquery!
+ 3. metaquery!
 
 Now you'll have access to the breakpoints that you've defined in three places:
 
