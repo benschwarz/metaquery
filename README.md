@@ -35,13 +35,10 @@ In your markup:
         Modernizr.load([
           {
             test: (!!window.matchMedia),
-            nope: ['./vendor/matchMedia-chuck.js']
+            nope: ['./js/vendor/matchMedia-chuck.js']
           },
           {
-            load: '../metaquery.js',
-            complete: function () {
-              metaQuery.init();
-            }
+            load: './js/metaquery.js'
           }
         ]);
       </script>
