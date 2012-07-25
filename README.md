@@ -67,6 +67,19 @@ Now you'll have access to the breakpoints that you've defined in three places:
 
 * ~~IE < 8 doesn't support media queries. Considering using [respond.js][respond.js]~~
 * ~~Add the [matchMedia][matchMedia.js] polyfill for < Chrome 10, Firefox 6, Safari 5.1~~
+    metaQuery.breakpoints.phone.mq.addListener( myCallbackMethod );
+    
+Heres a more full example: 
+
+    (function (metaQuery) {
+      metaQuery.breakpoints.phone.mq.addListener(function( mq ) {
+        if( mq.matches ) {
+          // media query matched, do something
+        } else {
+          // media query didn't match do something else
+        }
+      });
+    }(metaQuery));
 
 ## Backstory
 
