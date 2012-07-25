@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html>
   <head>
     <meta name="breakpoint" data="phone" media="(max-width: 480px)">
     <meta name="breakpoint" data="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="./qunit.css">
   </head>
   <body>
-    <img src="./images/noop.jpg" data-breakpoint-template="./images/{{breakpoint}}.jpg">
+    <img src="./images/noop.jpg" data-mq-src="./images/[breakpoint].jpg">
+
+    <img alt="Breakpoint name" data-mq-alt="[breakpoint]">
 
     <div id="qunit"></div>
   </body>

@@ -1,39 +1,74 @@
 (function ( window, document ) {
   window.metaQuery = {
-    breakpoints: {},
-    mediaqueries: []
+    breakpoints: {}
   };
-
-  var addEventListener = window.addEventListener,
-      documentElement = document.documentElement,
-
-  updateClasses = function ( mq ) {
-    var name = window.metaQuery.breakpoints[mq.media],
-        breakpoint = 'breakpoint-' + name;
-    
-    if(mq.matches) { 
-      documentElement.classList.add( breakpoint );
-    } else { 
-      documentElement.classList.remove( breakpoint ); 
+  
+  var readyState = function ( fn ) {
+    if( /in/.test( document.readyState ) ) {
+      window.setTimeout( function () {
+       readyState( fn );
+      }, 9 );
+    } else {
+      fn();
     }
   },
   
-  updateImages = function ( mq ) {
+  addClass = function ( element, className ) {
+    var classes = className.split(' ');
+    for( var i = 0; i < classes.length; i++ ) {
+      if( !hasClass( element, classes[i] ) ) {
+        element.className = element.className !== '' ? ( element.className + ' ' + classes[i] ) : classes[i];
+      }
+    }
+  },
+  
+  removeClass = function ( element, className ) {
+    var classes = className.split(' ');
+    for( var i = 0; i < classes.length; i++ ) {
+      element.className = element.className.replace( new RegExp( '\\b' + classes[i] + '\\b( )?', 'g' ), '' );
+    }
+  },
+  
+  hasClass = function ( element, className ) {
+    return new RegExp( '(^| )' + className + '( |$)', 'g' ).test( element.className );
+  },
+  
+  updateClasses = function ( mq, name ) {
+    var breakpoint = 'breakpoint-' + name,
+        htmlNode = document.documentElement;
+        
+    if( mq.matches ) {
+      addClass( htmlNode, breakpoint );
+    } else {
+      removeClass( htmlNode, breakpoint );
+    }
+  },
+  
+  updateElements = function ( mq, name ) {
     if( !mq.matches ) { return; }
 
-    var name = window.metaQuery.breakpoints[mq.media], 
-        images = document.getElementsByTagName( 'img' );
+    var elements = document.getElementsByTagName( 'img' );
     
-    for( var i = 0; i < images.length; i++ ) {
-      var attribute = images[i].getAttribute( 'data-breakpoint-template' );
-      if( attribute ) { images[i].src = attribute.replace( '{{breakpoint}}', name ); }
+    for( var i = 0; i < elements.length; i++ ) {
+      var el = elements[i];
+      
+      for( var j = 0; j < el.attributes.length; j++ ) {
+        var attribute = el.attributes[j],
+            rattr = attribute.name.match( /^data\-mq\-(.*)/ );
+
+        if( rattr ) { el.setAttribute( rattr[1], attribute.value.replace( '[breakpoint]', name ) ); }
+      }
     }
   },
   
   // Called when a media query changes state
-  mqChange = function ( mq ) {
-    updateClasses( mq );
-    updateImages( mq );
+  mqChange = function ( mq ) {  
+    var breakpoint;
+    for( var b in window.metaQuery.breakpoints ) {
+      if( window.metaQuery.breakpoints[b].query === mq.media ) { breakpoint = b; }
+    }
+    updateClasses( mq, breakpoint );
+    updateElements( mq, breakpoint );
   },
   
   collectBreakPoints = function () {
@@ -45,26 +80,26 @@
         var name = meta[i].getAttribute( 'data' ),
             query = meta[i].getAttribute( 'media' ),
             mq = window.matchMedia( query );
-        
-        window.metaQuery.mediaqueries.push(mq);
-        
+
         /* 
-          Store using mq.media, rather than the media query set, 
-          because MediaQueryList returns it in a different order
-          then its entered in. 
+          Store mq.media too. 
+          MediaQueryList can return the mediaquery in
+          a different syntax to that it was created in.
         */
-        window.metaQuery.breakpoints[mq.media] = name;
+        window.metaQuery.breakpoints[name] = {
+          query: mq.media,
+          mq: mq
+        };
+
         mq.addListener( mqChange );
         mqChange( mq );
       }
     }
   };
   
-  // Add events to run metaQuery
-  addEventListener( 'DOMContentLoaded', function () {
-    collectBreakPoints();
-    window.removeEventListener( 'load', collectBreakPoints );
-  });
+  window.metaQuery.init = collectBreakPoints;
 
-  addEventListener( 'load', collectBreakPoints );
+  // DOM ready  
+  readyState( collectBreakPoints );
+
 }( this, this.document ));

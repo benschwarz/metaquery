@@ -34,15 +34,18 @@ In your markup:
       <script>
         Modernizr.load([
           {
-            test: window.matchMedia
-            nope: './matchmedia.min.js'
+            test: (!!window.matchMedia),
+            nope: ['./vendor/matchMedia-chuck.js']
           },
           {
-            test: window.document.documentElement.classList,
-            nope: './classList.min.js'
-          }
+            test: (!!document.documentElement.classList),
+            nope: ['./vendor/classList.js']
+          },
           {
-            load: './metaquery.min.js'
+            load: '../metaquery.js',
+            complete: function () {
+              metaQuery.init();
+            }
           }
         ]);
       </script>
