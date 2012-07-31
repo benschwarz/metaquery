@@ -1,9 +1,18 @@
 (function ( window, document ) {
-  window.metaQuery = {
-    breakpoints: {}
-  };
+  var metaQuery = {
+    breakpoints: {},
+    _events: {},
+    _eventMatchCache: {},
+    bind: function ( name, fn ) {
+      ( metaQuery._events[name] = [] ).push( fn );
+      
+      mqChange();
+    }
+  },
   
-  var readyState = function ( fn ) {
+  // Pinched domready
+  // http://www.dustindiaz.com/smallest-domready-ever/
+  readyState = function ( fn ) {
     if( /in/.test( document.readyState ) ) {
       window.setTimeout( function () {
        readyState( fn );
@@ -11,6 +20,44 @@
     } else {
       fn();
     }
+  },
+  
+  addEvent = function ( element, event, fn ) {
+    if ( document.addEventListener ) {
+      element.addEventListener( event, fn );
+    } else {
+      element.attachEvent( 'on' + event, fn );
+    }
+  },
+  
+  // Pinched debounce.
+  // https://github.com/bestiejs/lodash/blob/v0.4.2/lodash.js#L2178
+  debounce = function( func, wait, immediate ) {
+    var args,
+        result,
+        thisArg,
+        timeoutId;
+
+    function delayed() {
+      timeoutId = null;
+      if ( !immediate ) {
+        func.apply( thisArg, args );
+      }
+    }
+    
+    return function() {
+      var isImmediate = immediate && !timeoutId;
+      args = arguments;
+      thisArg = this;
+
+      window.clearTimeout( timeoutId );
+      timeoutId = window.setTimeout( delayed, wait );
+
+      if ( isImmediate ) {
+        result = func.apply( thisArg, args );
+      }
+      return result;
+    };
   },
   
   addClass = function ( element, className ) {
@@ -62,44 +109,52 @@
   },
   
   // Called when a media query changes state
-  mqChange = function ( mq ) {  
-    var breakpoint;
-    for( var b in window.metaQuery.breakpoints ) {
-      if( window.metaQuery.breakpoints[b].query === mq.media ) { breakpoint = b; }
+  mqChange = function () {
+    for( var name in metaQuery.breakpoints ) {
+      var query = metaQuery.breakpoints[name],
+          mq = window.matchMedia( query );
+      
+      // Call events bound to a given breakpoint
+      if( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== mq.matches ) {
+        for( var i = 0; i < metaQuery._events[name].length; i++ ) {
+          var fn = metaQuery._events[name][i];
+          metaQuery._eventMatchCache[name] = mq.matches;
+          
+          if( typeof fn === 'function' ) { fn( mq.matches ); }
+        }
+      }
+      
+      updateClasses( mq, name );
+      updateElements( mq, name );
     }
-    updateClasses( mq, breakpoint );
-    updateElements( mq, breakpoint );
   },
   
-  collectBreakPoints = function () {
+  collectMediaQueries = function () {
     var meta = document.getElementsByTagName( 'meta' );
     
     // Add classes to the HTML node when a breakpoint matches
     for( var i = 0; i < meta.length; i++ ) {
       if( meta[i].name === 'breakpoint' ) {
         var name = meta[i].getAttribute( 'data' ),
-            query = meta[i].getAttribute( 'media' ),
-            mq = window.matchMedia( query );
+            query = meta[i].getAttribute( 'media' );
 
-        /* 
-          Store mq.media too. 
-          MediaQueryList can return the mediaquery in
-          a different syntax to that it was created in.
-        */
-        window.metaQuery.breakpoints[name] = {
-          query: mq.media,
-          mq: mq
-        };
-
-        mq.addListener( mqChange );
-        mqChange( mq );
+        metaQuery.breakpoints[name] = query;
       }
     }
+  },
+  
+  init = function () {
+    collectMediaQueries();
+    
+    addEvent( window, 'resize', debounce( function () {
+      mqChange();
+    }, 50 ));
+    
+    mqChange();
   };
   
-  window.metaQuery.init = collectBreakPoints;
-
-  // DOM ready  
-  readyState( collectBreakPoints );
-
+  window.metaQuery = metaQuery;
+  
+  // DOM ready
+  readyState( init );
 }( this, this.document ));

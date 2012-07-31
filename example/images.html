@@ -13,16 +13,16 @@
   </head>
   <body>
     <img src="./moon-phone.jpg" data-mq-src="./moon-[breakpoint].jpg">
+    <script>
+      Modernizr.load([
+        {
+          test: (!!window.matchMedia),
+          nope: ['./vendor/matchMedia-oldie.js']
+        },
+        {
+          load: '../metaquery.js'
+        }
+      ]);
+    </script>
   </body>
-  <script>
-    Modernizr.load([
-      {
-        test: (!!window.matchMedia),
-        nope: ['./vendor/matchMedia.js']
-      },
-      {
-        load: '../metaquery.js'
-      }
-    ]);
-  </script>
 </html>

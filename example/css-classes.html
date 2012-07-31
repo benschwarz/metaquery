@@ -20,20 +20,17 @@
       .breakpoint-widescreen body { background-image: url('./moon-widescreen.jpg'); }
     </style>
   </head>
-  <body></body>
-  <script>
-    Modernizr.load([
-      {
-        test: (!!window.matchMedia),
-        nope: ['./vendor/matchMedia-chuck.js']
-      },
-      {
-        test: (!!document.documentElement.classList),
-        nope: ['./vendor/classList.js']
-      },
-      {
-        load: '../metaquery.js'
-      }
-    ]);
-  </script>
+  <body>
+    <script>
+      Modernizr.load([
+        {
+          test: (!!window.matchMedia),
+          nope: ['./vendor/matchMedia-oldie.js']
+        },
+        {
+          load: '../metaquery.js'
+        }
+      ]);
+    </script>
+  </body>
 </html>
