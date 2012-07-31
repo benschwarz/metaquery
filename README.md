@@ -76,10 +76,10 @@ Considering the HTML example above, say you wanted watch for breakpoint changes:
 
 ## Backstory
 
-I worked on a large HTML magazine that is edited by an editorial team. Each 'module' of a template is responsive, and requires unique styles and sometimes even scripts. After reflecting on the project for some time, what worked, what didn't I made some simple observations: 
+I recently worked on a large HTML magazine that is edited by an editorial team. Each 'module' of a template is responsive, and requires unique styles and sometimes even scripts. After reflecting on the project for some time, what worked and what didn't, I made some simple observations: 
 
-* Writing media queries over and over again sucks. (Even though I used [the technique][responsive-design-with-sass] that I illustrated back in December 11')
-* If you want media query access in javascript, you'll create another media query with `matchMedia`
+* Writing media queries over and over again sucks. (Even though I use [the technique][responsive-design-with-sass] that I illustrated back in December 11')
+* If you want media query access in javascript, you'll create yet another media query with `matchMedia`
 * [picturefill][picturefill] is the best responsive image technique I've seen… until I authored templates for a massive magazine. The syntax is too long and easy to forget. 
 * and finally, a summary of all three: a declarative interface is far nicer to use.
 
