@@ -2,6 +2,8 @@
 
 A declarative breakpoint syntax. Defined in `<meta>`
 
+— by [@benschwarz](http://twitter.com/benschwarz)
+
 ## Getting Started
 
 Download the [production version][min] or the [development version][max].
@@ -62,7 +64,7 @@ Otherwise, go for your life in Chrome, Safari, Firefox and New IE.
 
 ## How do I know if my browser supports matchMedia? 
 
-Open a developer console, type `window.matchMedia`, if you get undefined, you'll need a polyfill.
+Open a developer console, type `window.matchMedia`, if you get undefined, you'll need a polyfill for that browser.
 
 ## Adding your own javascript events
 
@@ -81,7 +83,7 @@ I worked on a large HTML magazine that is edited by an editorial team. Each 'mod
 * [picturefill][picturefill] is the best responsive image technique I've seen… until I authored templates for a massive magazine. The syntax is too long and easy to forget. 
 * and finally, a summary of all three: a declarative interface is far nicer to use.
 
-After reading [Matt Wilcox's article], and the source of [picturefill][picturefill] I decided to get my hands dirty and have a go at a slightly better approach. 
+After reading both [Jeremy Keith][Jeremy Keith's article] and [Matt Wilcox's][Matt Wilcox's article] articles, then the source of [picturefill][picturefill] I decided to get my hands dirty and have a go at a slightly better approach. 
 
 Internally, metaQuery uses a resize event handler, you may be thinking, "but wait — not all media queries are related to device width", While this is true. metaQuery will still execute onLoad, and when additional events are bound. For me, this is enough, disagree? Please add an issue. 
 
@@ -110,6 +112,7 @@ Licensed under the MIT license.
 [matchMedia.js]: https://github.com/paulirish/matchMedia.js
 [matchmedia-oldie]: https://github.com/benschwarz/matchMedia.js/tree/IE7-8
 [picturefill]: https://github.com/scottjehl/picturefill
+[Jeremy Keith's article]: http://adactio.com/journal/5429/
 [Matt Wilcox's article]: http://mattwilcox.net/archive/entry/id/1091/
 [responsive-design-with-sass]: http://theint.ro/blogs/outro/4686992-responsive-design-with-sass
 [idiomatic.js]: https://github.com/rwldrn/idiomatic.js
