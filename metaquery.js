@@ -80,19 +80,19 @@
     return new RegExp( '(^| )' + className + '( |$)', 'g' ).test( element.className );
   },
   
-  updateClasses = function ( mq, name ) {
+  updateClasses = function ( matches, name ) {
     var breakpoint = 'breakpoint-' + name,
         htmlNode = document.documentElement;
         
-    if( mq.matches ) {
+    if( matches ) {
       addClass( htmlNode, breakpoint );
     } else {
       removeClass( htmlNode, breakpoint );
     }
   },
   
-  updateElements = function ( mq, name ) {
-    if( !mq.matches ) { return; }
+  updateElements = function ( matches, name ) {
+    if( !matches ) { return; }
 
     var elements = document.getElementsByTagName( 'img' );
     
@@ -112,20 +112,20 @@
   mqChange = function () {
     for( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
-          mq = window.matchMedia( query );
+          matches = window.matchMedia( query ).matches;
       
       // Call events bound to a given breakpoint
-      if( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== mq.matches ) {
+      if( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== matches ) {
         for( var i = 0; i < metaQuery._events[name].length; i++ ) {
           var fn = metaQuery._events[name][i];
-          metaQuery._eventMatchCache[name] = mq.matches;
+          metaQuery._eventMatchCache[name] = matches;
           
-          if( typeof fn === 'function' ) { fn( mq.matches ); }
+          if( typeof fn === 'function' ) { fn( matches ); }
         }
       }
       
-      updateClasses( mq, name );
-      updateElements( mq, name );
+      updateClasses( matches, name );
+      updateElements( matches, name );
     }
   },
   
