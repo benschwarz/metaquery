@@ -1,6 +1,6 @@
 # metaquery
 
-A declarative breakpoint syntax. Defined in `<meta>`
+A declarative breakpoint syntax. Defined in `<meta>` ([Demo](http://benschwarz.github.com/metaquery/images.html), [Demo](http://benschwarz.github.com/metaquery/css-classes.html))
 
 — by [@benschwarz](http://twitter.com/benschwarz)
 
