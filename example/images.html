@@ -10,8 +10,16 @@
     <meta name="breakpoint" data="widescreen" media="(min-width: 1024px)">
 
     <script src="./vendor/modernizr.js"></script>
+    <style>
+      body { font-family: "Helvetica Neue", sans-serif; }
+      img { max-width: 90%; }
+    </style>
   </head>
   <body>
+    <h1>metaQuery</h1>
+    <h2>A declarative breakpoint syntax.</h2>
+    <p>The data-mq-src attribute on the image below is used as a template, replacing '[breakpoint]' with the named breakpoints as the breakpoints are entered</p>
+    
     <img src="./moon-phone.jpg" data-mq-src="./moon-[breakpoint].jpg">
     <script>
       Modernizr.load([
