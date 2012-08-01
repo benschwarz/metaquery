@@ -29,56 +29,45 @@
       element.attachEvent( 'on' + event, fn );
     }
   },
-  
-  // Pinched debounce.
-  // https://github.com/bestiejs/lodash/blob/v0.4.2/lodash.js#L2178
-  debounce = function( func, wait, immediate ) {
+
+  debounce = function( func, wait ) {
     var args,
-        result,
         thisArg,
         timeoutId;
 
     function delayed() {
       timeoutId = null;
-      if ( !immediate ) {
-        func.apply( thisArg, args );
-      }
+      func.apply( thisArg, args );
     }
     
     return function() {
-      var isImmediate = immediate && !timeoutId;
-      args = arguments;
-      thisArg = this;
-
       window.clearTimeout( timeoutId );
       timeoutId = window.setTimeout( delayed, wait );
-
-      if ( isImmediate ) {
-        result = func.apply( thisArg, args );
-      }
-      return result;
     };
   },
   
-  addClass = function ( element, className ) {
-    var classes = className.split(' ');
-    for( var i = 0; i < classes.length; i++ ) {
-      if( !hasClass( element, classes[i] ) ) {
-        element.className = element.className !== '' ? ( element.className + ' ' + classes[i] ) : classes[i];
-      }
+  classRegex = {},
+  getClassRegex = function(className) {
+    if (!classRegex[className]) {
+      classRegex[className] = new RegExp('(?:^|\\s+)' + className + '(?:\\s+|$)', 'g');
     }
+    classRegex[className].lastIndex = 0;
+    return classRegex[className];
   },
-  
-  removeClass = function ( element, className ) {
-    var classes = className.split(' ');
-    for( var i = 0; i < classes.length; i++ ) {
-      element.className = element.className.replace( new RegExp( '\\b' + classes[i] + '\\b( )?', 'g' ), '' );
+
+  hasClass = function(element, className) {
+    return getClassRegex(className).test(element.className);
+  },
+
+  removeClass = function(element, className) {
+    element.className = (element.className || '').replace(getClassRegex(className), '');
+  },
+
+  addClass = function(element, className) {
+    if (!hasClass(element, className)) {
+      element.className = (element.className ? element.className + ' ' : '') + className;
     }
-  },
-  
-  hasClass = function ( element, className ) {
-    return new RegExp( '(^| )' + className + '( |$)', 'g' ).test( element.className );
-  },
+  },  
   
   updateClasses = function ( matches, name ) {
     var breakpoint = 'breakpoint-' + name,
@@ -97,10 +86,11 @@
     var elements = document.getElementsByTagName( 'img' );
     
     for( var i = 0; i < elements.length; i++ ) {
-      var el = elements[i];
+      var el = elements[i],
+          attributes = el.attributes;
       
-      for( var j = 0; j < el.attributes.length; j++ ) {
-        var attribute = el.attributes[j],
+      for( var j = 0; j < attributes.length; j++ ) {
+        var attribute = attributes[j],
             rattr = attribute.name.match( /^data\-mq\-(.*)/ );
 
         if( rattr ) { el.setAttribute( rattr[1], attribute.value.replace( '[breakpoint]', name ) ); }
