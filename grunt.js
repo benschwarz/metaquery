@@ -6,13 +6,18 @@ module.exports = function(grunt) {
       dist: {
         src: ['metaquery.js'],
         dest: 'metaquery.min.js'
+      },
+      
+      distjq: {
+        src: ['metaquery.jquery.js'],
+        dest: 'metaquery.jquery.min.js'
       }
     },
     qunit: {
       all: ['test/*.html']
     },
     lint: {
-      files: ['metaquery.js']
+      files: ['metaquery.js, metaquery.jquery.js']
     },
     watch: {
       files: '<config:lint.files>',

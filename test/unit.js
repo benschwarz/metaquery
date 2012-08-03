@@ -16,10 +16,6 @@ test( 'image source set', function () {
   equal( $( 'img[src]' ).attr( 'src' ), './images/phone.jpg' );
 });
 
-test( 'image alt set', function () {
-  equal( $( 'img[alt]' ).attr( 'alt' ), 'phone' );
-});
-
 /*test( 'media query active', function () {
   $(window).resize(320, 320);
   equal( window.metaQuery.mediaqueries[0].matches, true ); 

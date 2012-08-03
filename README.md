@@ -22,8 +22,17 @@ Internally, metaQuery uses a resize event handler, you may be thinking, "but wai
 
 Download the [production version][min] or the [development version][max].
 
+or, if you want the smaller, lighter jQuery powered edition:
+
+* [production jQuery version][minjq]
+* [development jQuery version][maxjq]
+
 [min]: https://raw.github.com/benschwarz/metaquery/master/metaquery.min.js
 [max]: https://raw.github.com/benschwarz/metaquery/master/metaquery.js
+[minjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.min.js
+[maxjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.js
+
+
 
 In your markup:
 

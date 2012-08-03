@@ -87,13 +87,10 @@
     
     for( var i = 0; i < elements.length; i++ ) {
       var el = elements[i],
-          attributes = el.attributes;
+          template = el.getAttribute( 'data-mq-src' );
       
-      for( var j = 0; j < attributes.length; j++ ) {
-        var attribute = attributes[j],
-            rattr = attribute.name.match( /^data\-mq\-(.*)/ );
-
-        if( rattr ) { el.setAttribute( rattr[1], attribute.value.replace( '[breakpoint]', name ) ); }
+      if( template ) {
+        el.src = template.replace( '[breakpoint]', name )
       }
     }
   },
