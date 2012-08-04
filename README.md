@@ -67,12 +67,12 @@ Considering the HTML example above, say you wanted watch for breakpoint changes:
 
 # Browser support
 
-metaQuery requires `matchMedia` support: 
+metaQuery requires `matchMedia`: 
 
 * Use the polyfill ([matchMedia.js][matchMedia.js])
 * If you wish to support IE 7 & 8, use my variant ([matchMedia-oldie.js][matchmedia-oldie])
 
-Otherwise, go for your life in Chrome, Safari, Firefox and New IE.
+Otherwise, metaQuery will work with all common desktop and mobile browsers. 
 
 ## Backstory
 
