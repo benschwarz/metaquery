@@ -26,33 +26,39 @@ or, if you want the smaller (476 bytes!), lighter jQuery powered edition:
 
 1. Define your breakpoints in `<meta>` tags.
 
-        <meta name="breakpoint" data="phone" media="(max-width: 480px)">
-        <meta name="breakpoint" data="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
-        <meta name="breakpoint" data="tablet" media="(min-width: 600px) and (max-width: 1024px)">
-        <meta name="breakpoint" data="widescreen" media="(min-width: 1024px)">
-        <meta name="breakpoint" data="retina" media="only screen and (-webkit-min-device-pixel-ratio : 2)">
-
+``` html
+<meta name="breakpoint" data="phone" media="(max-width: 480px)">
+<meta name="breakpoint" data="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
+<meta name="breakpoint" data="tablet" media="(min-width: 600px) and (max-width: 1024px)">
+<meta name="breakpoint" data="widescreen" media="(min-width: 1024px)">
+<meta name="breakpoint" data="retina" media="only screen and (-webkit-min-device-pixel-ratio : 2)">
+```
 
 2. metaQuery will add/remove classes to the `<html>` node (`.breakpoint-<name-of-breakpoint>`) for you to utilise when the breakpoints are matched. (shorter than media queries. don't repeat yourself)
 
-        <style>
-          .breakpoint-phone { background: red; }
-          .breakpoint-small-tablet { background: green; }
-          .breakpoint-tablet { background: blue; }
-          .breakpoint-widescreen { background: yellow; }
-        </style>
+``` html
+<style>
+  .breakpoint-phone { background: red; }
+  .breakpoint-small-tablet { background: green; }
+  .breakpoint-tablet { background: blue; }
+  .breakpoint-widescreen { background: yellow; }
+</style>
+```
     
 3. Responsive images in one simple line. 
 
-        <img src="./images/phone.jpg" data-mq-src="./images/[breakpoint].jpg">
+``` html
+<img src="./images/phone.jpg" data-mq-src="./images/[breakpoint].jpg">
+```
 
 4. Add modernizr to detect support for matchMedia, then use either the official [matchMedia.js][matchMedia.js] polyfill, or [my version that'll also work for IE7 & 8][matchmedia-oldie]
 
-        Modernizr.load([{
-          test: (!!window.matchMedia),
-          nope: ['./js/vendor/matchMedia-oldie.js']
-        }]);
-
+``` javascript
+Modernizr.load([{
+  test: (!!window.matchMedia),
+  nope: ['./js/vendor/matchMedia-oldie.js']
+}]);
+```
 
 5. Bask in glory. 
 
@@ -60,10 +66,11 @@ or, if you want the smaller (476 bytes!), lighter jQuery powered edition:
 
 Considering the HTML example above, say you wanted watch for breakpoint changes:
 
-    metaQuery.bind('phone', function (match) {
-      if( match ) { // phawor! your media query matches. }
-    });
-
+``` javascript
+metaQuery.bind('phone', function (match) {
+  if( match ) { // phawor! your media query matches. }
+});
+```
 
 # Browser support
 
