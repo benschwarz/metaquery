@@ -24,7 +24,7 @@ or, if you want the smaller (476 bytes!), lighter jQuery powered edition:
 
 ---
 
-1. Define your breakpoints in `<meta>` tags.
+* Define your breakpoints in `<meta>` tags.
 
 ``` html
 <meta name="breakpoint" data="phone" media="(max-width: 480px)">
@@ -34,7 +34,7 @@ or, if you want the smaller (476 bytes!), lighter jQuery powered edition:
 <meta name="breakpoint" data="retina" media="only screen and (-webkit-min-device-pixel-ratio : 2)">
 ```
 
-2. metaQuery will add/remove classes to the `<html>` node (`.breakpoint-<name-of-breakpoint>`) for you to utilise when the breakpoints are matched. (shorter than media queries. don't repeat yourself)
+* metaQuery will add/remove classes to the `<html>` node (`.breakpoint-<name-of-breakpoint>`) for you to utilise when the breakpoints are matched. (shorter than media queries. don't repeat yourself)
 
 ``` html
 <style>
@@ -45,13 +45,13 @@ or, if you want the smaller (476 bytes!), lighter jQuery powered edition:
 </style>
 ```
     
-3. Responsive images in one simple line. 
+* Responsive images in one simple line. 
 
 ``` html
 <img src="./images/phone.jpg" data-mq-src="./images/[breakpoint].jpg">
 ```
 
-4. Add modernizr to detect support for matchMedia, then use either the official [matchMedia.js][matchMedia.js] polyfill, or [my version that'll also work for IE7 & 8][matchmedia-oldie]
+* Add modernizr to detect support for matchMedia, then use either the official [matchMedia.js][matchMedia.js] polyfill, or [my version that'll also work for IE7 & 8][matchmedia-oldie]
 
 ``` javascript
 Modernizr.load([{
@@ -59,8 +59,6 @@ Modernizr.load([{
   nope: ['./js/vendor/matchMedia-oldie.js']
 }]);
 ```
-
-5. Bask in glory. 
 
 ## Adding your own javascript events with metaQuery.bind
 
