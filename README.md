@@ -1,8 +1,78 @@
 # metaquery
 
-A declarative breakpoint syntax. Defined in `<meta>` ([Demo](http://benschwarz.github.com/metaquery/images.html), [Demo](http://benschwarz.github.com/metaquery/css-classes.html))
+A declarative responsive web design syntax. Breakpoints, defined in `<meta>`
+
+With metaquery, you define your media query breakpoints once, and only once. 
+
+([Demo](http://benschwarz.github.com/metaquery/images.html), [Demo](http://benschwarz.github.com/metaquery/css-classes.html))
 
 — by [@benschwarz](http://twitter.com/benschwarz)
+
+## Getting Started
+
+Download the [production version][min] (723 bytes) or the [development version][max].
+
+or, if you want the smaller (476 bytes!), lighter jQuery powered edition:
+
+* [production jQuery version][minjq]
+* [development jQuery version][maxjq]
+
+[min]: https://raw.github.com/benschwarz/metaquery/master/metaquery.min.js
+[max]: https://raw.github.com/benschwarz/metaquery/master/metaquery.js
+[minjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.min.js
+[maxjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.js
+
+---
+
+1. Define your breakpoints in `<meta>` tags.
+
+        <meta name="breakpoint" data="phone" media="(max-width: 480px)">
+        <meta name="breakpoint" data="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
+        <meta name="breakpoint" data="tablet" media="(min-width: 600px) and (max-width: 1024px)">
+        <meta name="breakpoint" data="widescreen" media="(min-width: 1024px)">
+        <meta name="breakpoint" data="retina" media="only screen and (-webkit-min-device-pixel-ratio : 2)">
+
+
+2. metaQuery will add/remove classes to the `<html>` node (`.breakpoint-<name-of-breakpoint>`) for you to utilise when the breakpoints are matched. (shorter than media queries. don't repeat yourself)
+
+        <style>
+          .breakpoint-phone { background: red; }
+          .breakpoint-small-tablet { background: green; }
+          .breakpoint-tablet { background: blue; }
+          .breakpoint-widescreen { background: yellow; }
+        </style>
+    
+3. Responsive images in one simple line. 
+
+        <img src="./images/phone.jpg" data-mq-src="./images/[breakpoint].jpg">
+
+4. Add modernizr to detect support for matchMedia, then use either the official [matchMedia.js][matchMedia.js] polyfill, or [my version that'll also work for IE7 & 8][matchmedia-oldie]
+
+        Modernizr.load([{
+          test: (!!window.matchMedia),
+          nope: ['./js/vendor/matchMedia-oldie.js']
+        }]);
+
+
+5. Bask in glory. 
+
+## Adding your own javascript events with metaQuery.bind
+
+Considering the HTML example above, say you wanted watch for breakpoint changes:
+
+    metaQuery.bind('phone', function (match) {
+      if( match ) { // phawor! your media query matches. }
+    });
+
+
+# Browser support
+
+metaQuery requires `matchMedia` support: 
+
+* Use the polyfill ([matchMedia.js][matchMedia.js])
+* If you wish to support IE 7 & 8, use my variant ([matchMedia-oldie.js][matchmedia-oldie])
+
+Otherwise, go for your life in Chrome, Safari, Firefox and New IE.
 
 ## Backstory
 
@@ -15,87 +85,7 @@ I recently worked on a large HTML magazine that is edited by an editorial team. 
 
 After reading both [Jeremy Keith][Jeremy Keith's article] and [Matt Wilcox's][Matt Wilcox's article] articles, then the source of [picturefill][picturefill] I decided to get my hands dirty and have a go at a slightly better approach. 
 
-Internally, metaQuery uses a resize event handler, you may be thinking, "but wait — not all media queries are related to device width", While this is true. metaQuery will still execute onLoad, and when additional events are bound. For me, this is enough, disagree? Please add an issue. 
-
-
-## Getting Started
-
-Download the [production version][min] or the [development version][max].
-
-or, if you want the smaller, lighter jQuery powered edition:
-
-* [production jQuery version][minjq]
-* [development jQuery version][maxjq]
-
-[min]: https://raw.github.com/benschwarz/metaquery/master/metaquery.min.js
-[max]: https://raw.github.com/benschwarz/metaquery/master/metaquery.js
-[minjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.min.js
-[maxjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.js
-
-
-
-In your markup:
-
-    <!doctype html>
-    <html>
-      <head>
-        <meta name="breakpoint" data="phone" media="(max-width: 480px)">
-        <meta name="breakpoint" data="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
-        <meta name="breakpoint" data="tablet" media="(min-width: 600px) and (max-width: 1024px)">
-        <meta name="breakpoint" data="widescreen" media="(min-width: 1024px)">
-        <meta name="breakpoint" data="retina" media="only screen and (-webkit-min-device-pixel-ratio : 2)">
-        
-        <script src="./js/vendor/modernizr.js"></script>
-  
-        <style>
-          .breakpoint-phone { background: red; }
-          .breakpoint-small-tablet { background: green; }
-          .breakpoint-tablet { background: blue; }
-          .breakpoint-widescreen { background: yellow; }
-        </style>
-      </head>
-      <body>
-        <img src="./images/phone.jpg" data-mq-src="./images/[breakpoint].jpg">
-      </body>
-      <script>
-        Modernizr.load([
-          {
-            test: (!!window.matchMedia),
-            nope: ['./js/vendor/matchMedia-oldie.js']
-          },
-          {
-            load: './js/metaquery.js'
-          }
-        ]);
-      </script>
-    </html>
-
-Now you'll have access to the breakpoints that you've defined in three places:
-
-* Via the CSS classes `.breakpoint-<name-of-breakpoint>` (shorter than media queries, no repeating yourself)
-* Via responsive image tags (use the declarative interface for defining a convention, then build with that)
-* Bind additional events in Javascript with `metaQuery.bind`
-
-# Browser support
-
-metaQuery requires `matchMedia` support: 
-
-* Use the polyfill ([matchMedia.js][matchMedia.js])
-* If you wish to support IE 7 & 8, use my variant ([matchMedia-oldie.js][matchmedia-oldie])
-
-Otherwise, go for your life in Chrome, Safari, Firefox and New IE.
-
-## How do I know if my browser supports matchMedia? 
-
-Open a developer console, type `window.matchMedia`, if you get undefined, you'll need a polyfill for that browser.
-
-## Adding your own javascript events
-
-Considering the HTML example above, say you wanted watch for breakpoint changes:
-
-    metaQuery.bind('phone', function (match) {
-      if( match ) { // phawor! your media query matches. }
-    });
+Internally, metaQuery uses a resize event handler, you may be thinking, "but wait — not all media queries are related to device width", While this is true. metaQuery will still execute onLoad, and when additional events are bound. For me, this is enough, disagree? Please add an issue.
 
 ## Contributing
 Please use [idiomatic.js][idiomatic.js] as a styleguide and take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
