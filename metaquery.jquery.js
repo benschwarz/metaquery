@@ -1,4 +1,4 @@
-(function ( window, document ) {
+(function ( window, document, $ ) {
   var metaQuery = {
     breakpoints: {},
     _events: {},
@@ -85,4 +85,4 @@
   $(function () {
     init();
   })
-}( this, this.document ));
+}( this, this.document, jQuery ));
