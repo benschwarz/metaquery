@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <!--
+    Thanks NASA. http://www.jpl.nasa.gov/spaceimages/details.php?id=PIA12765
+  -->
+  <head>
+    <meta name="breakpoint" data="phone" media="(max-width: 480px)">
+    <meta name="breakpoint" data="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
+    <meta name="breakpoint" data="tablet" media="(min-width: 600px) and (max-width: 1024px)">
+    <meta name="breakpoint" data="widescreen" media="(min-width: 1024px)">
+
+    <script src="./vendor/modernizr.js"></script>
+    <style>
+      body { font-family: "Helvetica Neue", sans-serif; }
+      img { max-width: 90%; }
+    </style>
+  </head>
+  <body>
+    <h1>metaQuery</h1>
+    <h2>A declarative breakpoint syntax.</h2>
+    <p>The data-mq-src attribute on the image below is used as a template, replacing '[breakpoint]' with the named breakpoints as the breakpoints are entered</p>
+    
+    <img src="./moon-phone.jpg" data-mq-src="./moon-[breakpoint].jpg">
+    <script>
+      Modernizr.load([
+        {
+          test: (!!window.matchMedia),
+          nope: ['./vendor/matchMedia-oldie.js']
+        },
+        {
+          load: ['./vendor/jquery.js', ' ../metaquery.jquery.js']
+        }
+      ]);
+    </script>
+  </body>
+</html>
