@@ -54,7 +54,7 @@ or, if you want the smaller (476 bytes!), lighter jQuery powered edition:
 
 ``` javascript
 Modernizr.load([{
-  test: (!!window.matchMedia),
+  test: ( !!window.matchMedia ),
   nope: ['./js/vendor/matchMedia-oldie.js']
 }]);
 ```
@@ -64,7 +64,7 @@ Modernizr.load([{
 Considering the HTML example above, say you wanted watch for breakpoint changes:
 
 ``` javascript
-metaQuery.bind('phone', function (match) {
+metaQuery.bind( 'phone', function (match) {
   if( match ) { // phawor! your media query matches. }
 });
 ```
@@ -93,10 +93,6 @@ Internally, metaQuery uses a resize event handler, you may be thinking, "but wai
 
 ## Contributing
 Please use [idiomatic.js][idiomatic.js] as a styleguide and take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
-
-## Release History
-
-* 0.0.1 - Initial. Baller. Edition.
 
 ## Thanks to
 
