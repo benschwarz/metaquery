@@ -56,16 +56,16 @@
   },
 
   hasClass = function(element, className) {
-    return getClassRegex(className).test(element.className);
+    return getClassRegex( className ).test( element.className );
   },
 
   removeClass = function(element, className) {
-    element.className = (element.className || '').replace(getClassRegex(className), '');
+    element.className = ( element.className || '' ).replace( getClassRegex(className), '' );
   },
 
   addClass = function(element, className) {
-    if (!hasClass(element, className)) {
-      element.className = (element.className ? element.className + ' ' : '') + className;
+    if ( !hasClass(element, className) ) {
+      element.className = ( element.className ? element.className + ' ' : '' ) + className;
     }
   },  
   
