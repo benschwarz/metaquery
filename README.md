@@ -101,7 +101,6 @@ Reviewers: Tim Lucas, Ben Alman, Jeremy Keith, Paul Irish, Divya Manian, David D
 Code: 
 
 * Scott Jehl for writing picturefill, matchMedia.js (with Paul Irish) and respond.js. Legend.
-* Nico Wiedemann (EarMaster) for his add/remove/hasClass implementation //github.com/EarMaster/CSSClass
 * Dustin Diaz's teeny dom ready.
 
 ## License
