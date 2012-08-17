@@ -29,81 +29,65 @@
       element.attachEvent( 'on' + event, fn );
     }
   },
-  
-  // Pinched debounce.
-  // https://github.com/bestiejs/lodash/blob/v0.4.2/lodash.js#L2178
-  debounce = function( func, wait, immediate ) {
+
+  debounce = function( func, wait ) {
     var args,
-        result,
         thisArg,
         timeoutId;
 
     function delayed() {
       timeoutId = null;
-      if ( !immediate ) {
-        func.apply( thisArg, args );
-      }
+      func.apply( thisArg, args );
     }
     
     return function() {
-      var isImmediate = immediate && !timeoutId;
-      args = arguments;
-      thisArg = this;
-
       window.clearTimeout( timeoutId );
       timeoutId = window.setTimeout( delayed, wait );
-
-      if ( isImmediate ) {
-        result = func.apply( thisArg, args );
-      }
-      return result;
     };
   },
   
-  addClass = function ( element, className ) {
-    var classes = className.split(' ');
-    for( var i = 0; i < classes.length; i++ ) {
-      if( !hasClass( element, classes[i] ) ) {
-        element.className = element.className !== '' ? ( element.className + ' ' + classes[i] ) : classes[i];
-      }
+  hasClass = function( element, className ) {
+    return element.className.split(' ').indexOf( className ) !== -1;
+  },
+
+  removeClass = function( element, className ) {
+    var classes = element.className.split( ' ' ),
+        id = classes.indexOf( className );
+
+    if ( hasClass( element, className ) ) {
+      classes.splice( id, 1 );
+      element.className = classes.join( ' ' );    
     }
   },
-  
-  removeClass = function ( element, className ) {
-    var classes = className.split(' ');
-    for( var i = 0; i < classes.length; i++ ) {
-      element.className = element.className.replace( new RegExp( '\\b' + classes[i] + '\\b( )?', 'g' ), '' );
+
+  addClass = function(element, className) {
+    if ( !hasClass( element, className ) ) {
+      element.className = ( element.className !== '' ) ? ( element.className + ' ' + className ) : className;  
     }
-  },
+  },  
   
-  hasClass = function ( element, className ) {
-    return new RegExp( '(^| )' + className + '( |$)', 'g' ).test( element.className );
-  },
-  
-  updateClasses = function ( mq, name ) {
+  updateClasses = function ( matches, name ) {
     var breakpoint = 'breakpoint-' + name,
         htmlNode = document.documentElement;
         
-    if( mq.matches ) {
+    if( matches ) {
       addClass( htmlNode, breakpoint );
     } else {
       removeClass( htmlNode, breakpoint );
     }
   },
   
-  updateElements = function ( mq, name ) {
-    if( !mq.matches ) { return; }
+  updateElements = function ( matches, name ) {
+    if( !matches ) { return; }
 
     var elements = document.getElementsByTagName( 'img' );
     
     for( var i = 0; i < elements.length; i++ ) {
-      var el = elements[i];
+      var el = elements[i],
+          template = el.getAttribute( 'data-mq-src' );
       
-      for( var j = 0; j < el.attributes.length; j++ ) {
-        var attribute = el.attributes[j],
-            rattr = attribute.name.match( /^data\-mq\-(.*)/ );
-
-        if( rattr ) { el.setAttribute( rattr[1], attribute.value.replace( '[breakpoint]', name ) ); }
+      if( template ) {
+        el.src = template.replace( '[breakpoint]', name )
       }
     }
   },
@@ -112,20 +96,20 @@
   mqChange = function () {
     for( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
-          mq = window.matchMedia( query );
+          matches = window.matchMedia( query ).matches;
       
       // Call events bound to a given breakpoint
-      if( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== mq.matches ) {
+      if( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== matches ) {
         for( var i = 0; i < metaQuery._events[name].length; i++ ) {
           var fn = metaQuery._events[name][i];
-          metaQuery._eventMatchCache[name] = mq.matches;
+          metaQuery._eventMatchCache[name] = matches;
           
-          if( typeof fn === 'function' ) { fn( mq.matches ); }
+          if( typeof fn === 'function' ) { fn( matches ); }
         }
       }
       
-      updateClasses( mq, name );
-      updateElements( mq, name );
+      updateClasses( matches, name );
+      updateElements( matches, name );
     }
   },
   
