@@ -46,26 +46,23 @@
     };
   },
   
-  classRegex = {},
-  getClassRegex = function(className) {
-    if (!classRegex[className]) {
-      classRegex[className] = new RegExp('(?:^|\\s+)' + className + '(?:\\s+|$)', 'g');
+  hasClass = function( element, className ) {
+    return element.className.split(' ').indexOf( className ) !== -1;
+  },
+
+  removeClass = function( element, className ) {
+    var classes = element.className.split( ' ' ),
+        id = classes.indexOf( className );
+
+    if ( hasClass( element, className ) ) {
+      classes.splice( id, 1 );
+      element.className = classes.join( ' ' );    
     }
-    classRegex[className].lastIndex = 0;
-    return classRegex[className];
-  },
-
-  hasClass = function(element, className) {
-    return getClassRegex( className ).test( element.className );
-  },
-
-  removeClass = function(element, className) {
-    element.className = ( element.className || '' ).replace( getClassRegex(className), '' );
   },
 
   addClass = function(element, className) {
-    if ( !hasClass(element, className) ) {
-      element.className = ( element.className ? element.className + ' ' : '' ) + className;
+    if ( !hasClass( element, className ) ) {
+      element.className = ( element.className !== '' ) ? ( element.className + ' ' + className ) : className;  
     }
   },  
   

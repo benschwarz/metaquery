@@ -9,9 +9,9 @@ With metaquery, you define your media query breakpoints once, and only once.
 
 ## Getting Started
 
-Download the [production version][min] (723 bytes) or the [development version][max].
+Download the [production version][min] (691 bytes) or the [development version][max].
 
-or, if you want the smaller (476 bytes!), lighter jQuery powered edition:
+or, if you want the smaller (480 bytes!), lighter jQuery powered edition:
 
 * [production jQuery version][minjq]
 * [development jQuery version][maxjq]
@@ -64,7 +64,7 @@ Modernizr.load([{
 Considering the HTML example above, say you wanted watch for breakpoint changes:
 
 ``` javascript
-metaQuery.bind( 'phone', function (match) {
+metaQuery.bind( 'phone', function ( match ) {
   if( match ) { // phawor! your media query matches. }
 });
 ```
@@ -106,7 +106,6 @@ Code:
 ## License
 Copyright (c) 2012 Ben Schwarz  
 Licensed under the MIT license.
-
 
 [matchMedia.js]: https://github.com/paulirish/matchMedia.js
 [matchmedia-oldie]: https://github.com/benschwarz/matchMedia.js/tree/IE7-8
