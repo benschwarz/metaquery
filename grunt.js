@@ -47,4 +47,5 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', 'qunit lint min');
 
+  grunt.registerTask('travis', 'lint qunit');
 };
