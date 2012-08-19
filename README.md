@@ -1,4 +1,4 @@
-# metaquery
+# metaquery [![Build Status](https://secure.travis-ci.org/benschwarz/metaquery.png?branch=master)](http://travis-ci.org/benschwarz/metaquery)
 
 A declarative responsive web design syntax. Breakpoints, defined in `<meta>`
 With metaquery, you define your media query breakpoints once, and only once. 
