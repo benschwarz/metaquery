@@ -1,7 +1,7 @@
 # metaquery [![Build Status](https://secure.travis-ci.org/benschwarz/metaquery.png?branch=master)](http://travis-ci.org/benschwarz/metaquery)
 
 A declarative responsive web design syntax. Breakpoints, defined in `<meta>`
-With metaquery, you define your media query breakpoints once, and only once. 
+With metaquery, you define your media query breakpoints once, and only once.
 
 ([Demo](http://benschwarz.github.com/metaquery/images.html), [Demo](http://benschwarz.github.com/metaquery/css-classes.html))
 
@@ -44,10 +44,12 @@ or, if you want the smaller (480 bytes!), lighter jQuery powered edition:
 </style>
 ```
     
-* Responsive images in one simple line. 
+* Responsive images in one simple line. metaQuery will add `src` attribute to the `<img>` node (`src="./images/name-<name-of-breakpoint>.jpg"`). Don't define default `src` attribute because on load time, you don't know which breakpoint will be in use, metaQuery take care of that for you.
+
+You need to define one image file for each breakpoint, following the naming convention `<name>-<name-of-breakpoint>.<extension>`, ie: `name-phone.jpg`
 
 ``` html
-<img src="./images/phone.jpg" data-mq-src="./images/[breakpoint].jpg">
+<img data-mq-src="./images/name.jpg">
 ```
 
 * Add modernizr to detect support for matchMedia, then use either the official [matchMedia.js][matchMedia.js] polyfill, or [my version that'll also work for IE7 & 8][matchmedia-oldie]
