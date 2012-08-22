@@ -44,7 +44,9 @@ or, if you want the smaller (480 bytes!), lighter jQuery powered edition:
 </style>
 ```
     
-* Responsive images in one simple line. metaQuery will add `src` attribute to the `<img>` node (`src="./images/name-<name-of-breakpoint>.jpg"`). Don't define default `src` attribute because on load time, you don't know which breakpoint will be in use, metaQuery take care of that for you.
+* Responsive images in one simple line. 
+
+metaQuery will add `src` attribute to the `<img>` node (`src="./images/name-<name-of-breakpoint>.jpg"`). Don't define default `src` attribute because on load time, you don't know which breakpoint will be in use, metaQuery take care of that for you.
 
 You need to define one image file for each breakpoint, following the naming convention `<name>-<name-of-breakpoint>.<extension>`, ie: `name-phone.jpg`
 
