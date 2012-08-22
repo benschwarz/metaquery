@@ -12,8 +12,8 @@ test( 'class added', function () {
   equal( $( window.document.documentElement ).hasClass( 'breakpoint-phone' ), true );
 });
 
-test( 'image source set', function () {
-  equal( $( 'img[src]' ).attr( 'src' ), './images/phone.jpg' );
+test( 'image src set', function () {
+  equal( $( 'img' ).attr( 'src' ), './images/moon-phone.jpg' );
 });
 
 /*test( 'media query active', function () {
