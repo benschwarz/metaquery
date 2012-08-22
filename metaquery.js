@@ -77,17 +77,18 @@
     }
   },
   
-  updateElements = function ( matches, name ) {
+  updateElements = function ( matches, suffix ) {
     if( !matches ) { return; }
 
     var elements = document.getElementsByTagName( 'img' );
     
     for( var i = 0; i < elements.length; i++ ) {
       var el = elements[i],
-          template = el.getAttribute( 'data-mq-src' );
-      
-      if( template ) {
-        el.src = template.replace( '[breakpoint]', name )
+          name = el.getAttribute( 'data-mq-src' );
+      if( name ) {
+        var extension = name.substring(name.lastIndexOf('.'), name.length);
+            path = name.substring(0, name.lastIndexOf('.'));
+        el.src = path + '-' + suffix + extension;
       }
     }
   },
