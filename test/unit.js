@@ -8,10 +8,6 @@ test( 'public api', function () {
   });
 });
 
-test( 'class added', function () {
-  equal( $( window.document.documentElement ).hasClass( 'breakpoint-phone' ), true );
-});
-
 test( 'image src set', function () {
   equal( $( 'img' ).attr( 'src' ), './images/moon-phone.jpg' );
 });
