@@ -5,7 +5,13 @@ With metaquery, you define your media query breakpoints once, and only once.
 
 ([Demo](http://benschwarz.github.com/metaquery/images.html), [Demo](http://benschwarz.github.com/metaquery/css-classes.html))
 
-— by [@benschwarz](http://twitter.com/benschwarz)
+Author — [@benschwarz](http://twitter.com/benschwarz)
+Updated by - [@denisjacquemin](http://twitter.com/denisjacquemin)
+
+## Updates from original
+
+* responsive images - no [breakpoint] required in filename pattern
+* add/remove classes removed [reason discussed at issue 6]{http://benschwarz.github.com/metaquery/issues/6}
 
 ## Getting Started
 
@@ -16,10 +22,10 @@ or, if you want the smaller (480 bytes!), lighter jQuery powered edition:
 * [production jQuery version][minjq]
 * [development jQuery version][maxjq]
 
-[min]: https://raw.github.com/benschwarz/metaquery/master/metaquery.min.js
-[max]: https://raw.github.com/benschwarz/metaquery/master/metaquery.js
-[minjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.min.js
-[maxjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.js
+[min]: https://raw.github.com/denisjacquemin/metaquery/master/metaquery.min.js
+[max]: https://raw.github.com/denisjacquemin/metaquery/master/metaquery.js
+[minjq]: https://raw.github.com/denisjacquemin/metaquery/master/metaquery.jquery.min.js
+[maxjq]: https://raw.github.com/denisjacquemin/metaquery/master/metaquery.jquery.js
 
 ---
 
@@ -32,21 +38,10 @@ or, if you want the smaller (480 bytes!), lighter jQuery powered edition:
 <meta name="breakpoint" data="widescreen" media="(min-width: 1024px)">
 <meta name="breakpoint" data="retina" media="only screen and (-webkit-min-device-pixel-ratio : 2)">
 ```
-
-* metaQuery will add/remove classes to the `<html>` node (`.breakpoint-<name-of-breakpoint>`) for you to utilise when the breakpoints are matched. (shorter than media queries. don't repeat yourself)
-
-``` html
-<style>
-  .breakpoint-phone { background: red; }
-  .breakpoint-small-tablet { background: green; }
-  .breakpoint-tablet { background: blue; }
-  .breakpoint-widescreen { background: yellow; }
-</style>
-```
     
 * Responsive images in one simple line. 
 
-metaQuery will add `src` attribute to the `<img>` node (`src="./images/name-<name-of-breakpoint>.jpg"`). Don't define default `src` attribute because on load time, you don't know which breakpoint will be in use, metaQuery take care of that for you.
+metaQuery will add `src` attribute to the `<img>` node (`src="./images/name-<name-of-breakpoint>.jpg"`). 
 
 You need to define one image file for each breakpoint, following the naming convention `<name>-<name-of-breakpoint>.<extension>`, ie: `name-phone.jpg`
 
@@ -110,7 +105,7 @@ Code:
 ## License
 Copyright (c) 2012 Ben Schwarz  
 Licensed under the MIT license.
-
+[forked from mediaquery]: https://github.com/benschwarz/mediaquery/
 [matchMedia.js]: https://github.com/paulirish/matchMedia.js
 [matchmedia-oldie]: https://github.com/benschwarz/matchMedia.js/tree/IE7-8
 [picturefill]: https://github.com/scottjehl/picturefill
