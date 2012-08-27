@@ -66,17 +66,6 @@
     }
   },  
   
-  updateClasses = function ( matches, name ) {
-    var breakpoint = 'breakpoint-' + name,
-        htmlNode = document.documentElement;
-        
-    if( matches ) {
-      addClass( htmlNode, breakpoint );
-    } else {
-      removeClass( htmlNode, breakpoint );
-    }
-  },
-  
   updateElements = function ( matches, suffix ) {
     if( !matches ) { return; }
 
@@ -109,7 +98,6 @@
         }
       }
       
-      updateClasses( matches, name );
       updateElements( matches, name );
     }
   },

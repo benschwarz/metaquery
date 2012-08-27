@@ -26,10 +26,6 @@
     };
   },
   
-  updateClasses = function ( matches, name ) {  
-    $( 'html' ).toggleClass( 'breakpoint-' + name, matches );
-  },
-  
   updateElements = function ( matches, suffix ) {
     if( !matches ) { return; }
     
@@ -58,8 +54,6 @@
           if( typeof fn === 'function' ) { fn( matches ); }
         }
       }
-      
-      updateClasses( matches, name );
       updateElements( matches, name );
     }
   },
