@@ -26,18 +26,16 @@
     };
   },
   
-  updateClasses = function ( matches, name ) {  
-    $( 'html' ).toggleClass( 'breakpoint-' + name, matches );
-  },
-  
-  updateElements = function ( matches, name ) {
+  updateElements = function ( matches, suffix ) {
     if( !matches ) { return; }
     
     $( 'img[data-mq-src]' ).each(function () {
       var $img = $( this ),
-          attr = $img.attr( 'data-mq-src');
-          
-      $img.attr( 'src', attr.replace( '[breakpoint]', name ) );
+          name = $img.attr( 'data-mq-src');
+          extension = name.substring(name.lastIndexOf('.'), name.length);
+          path = name.substring(0, name.lastIndexOf('.'));
+
+      $img.attr( 'src', path + '-' + suffix + extension);
     });
   },
   
@@ -56,8 +54,6 @@
           if( typeof fn === 'function' ) { fn( matches ); }
         }
       }
-      
-      updateClasses( matches, name );
       updateElements( matches, name );
     }
   },

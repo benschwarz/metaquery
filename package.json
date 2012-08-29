@@ -3,7 +3,7 @@
   "title": "metaquery",
   "description": "A declarative responsive web design syntax. Breakpoints, defined in `<meta>` ",
   "version": "1.0.0",
-  "homepage": "https://github.com/benschwarz/metaquery",
+  "homepage": "https://github.com/denisjacquemin/metaquery",
   "author": {
     "name": "Ben Schwarz",
     "email": "ben@germanforblack.com",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/benschwarz/metaquery.git"
+    "url": "git://github.com/denisjacquemin/metaquery.git"
   },
   "bugs": {
-    "url": "https://github.com/benschwarz/metaquery/issues"
+    "url": "https://github.com/denisjacquemin/metaquery/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/benschwarz/metaquery/blob/master/LICENSE-MIT"
+      "url": "https://github.com/denisjacquemin/metaquery/blob/master/LICENSE-MIT"
     }
   ],
   "dependencies": {
