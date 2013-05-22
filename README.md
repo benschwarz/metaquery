@@ -9,9 +9,13 @@ With metaquery, you define your media query breakpoints once, and only once.
 
 ## Getting Started
 
+Install via Bower `bower install metaquery`
+
+Otherwise, if you want to grab it manually:
+
 Download the [production version][min] (691 bytes) or the [development version][max].
 
-or, if you want the smaller (480 bytes!), lighter jQuery powered edition:
+The smaller (480 bytes!), lighter jQuery powered edition:
 
 * [production jQuery version][minjq]
 * [development jQuery version][maxjq]
