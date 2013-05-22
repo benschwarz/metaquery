@@ -13,7 +13,7 @@
   // Pinched domready
   // http://www.dustindiaz.com/smallest-domready-ever/
   readyState = function ( fn ) {
-    if( /in/.test( document.readyState ) ) {
+    if ( /in/.test( document.readyState ) ) {
       window.setTimeout( function () {
        readyState( fn );
       }, 9 );
@@ -70,7 +70,7 @@
     var breakpoint = 'breakpoint-' + name,
         htmlNode = document.documentElement;
         
-    if( matches ) {
+    if ( matches ) {
       addClass( htmlNode, breakpoint );
     } else {
       removeClass( htmlNode, breakpoint );
@@ -78,16 +78,16 @@
   },
   
   updateElements = function ( matches, name ) {
-    if( !matches ) { return; }
+    if ( !matches ) { return; }
 
     var elements = document.getElementsByTagName( 'img' );
     
-    for( var i = 0; i < elements.length; i++ ) {
+    for ( var i = 0; i < elements.length; i++ ) {
       var el = elements[i],
           template = el.getAttribute( 'data-mq-src' );
       
-      if( template ) {
-        el.src = template.replace( '[breakpoint]', name )
+      if ( template ) {
+        el.src = template.replace( '[breakpoint]', name );
       }
     }
   },
@@ -99,12 +99,12 @@
           matches = window.matchMedia( query ).matches;
       
       // Call events bound to a given breakpoint
-      if( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== matches ) {
-        for( var i = 0; i < metaQuery._events[name].length; i++ ) {
+      if ( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== matches ) {
+        for ( var i = 0; i < metaQuery._events[name].length; i++ ) {
           var fn = metaQuery._events[name][i];
           metaQuery._eventMatchCache[name] = matches;
           
-          if( typeof fn === 'function' ) { fn( matches ); }
+          if ( typeof fn === 'function' ) { fn( matches ); }
         }
       }
       
@@ -117,8 +117,8 @@
     var meta = document.getElementsByTagName( 'meta' );
     
     // Add classes to the HTML node when a breakpoint matches
-    for( var i = 0; i < meta.length; i++ ) {
-      if( meta[i].name === 'breakpoint' ) {
+    for ( var i = 0; i < meta.length; i++ ) {
+      if ( meta[i].name === 'breakpoint' ) {
         var name = meta[i].getAttribute( 'data' ),
             query = meta[i].getAttribute( 'media' );
 

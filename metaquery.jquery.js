@@ -31,7 +31,7 @@
   },
   
   updateElements = function ( matches, name ) {
-    if( !matches ) { return; }
+    if ( !matches ) { return; }
     
     $( 'img[data-mq-src]' ).each(function () {
       var $img = $( this ),
@@ -43,12 +43,12 @@
   
   // Called when a media query changes state
   mqChange = function () {
-    for( var name in metaQuery.breakpoints ) {
+    for ( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
           matches = window.matchMedia( query ).matches;
       
       // Call events bound to a given breakpoint
-      if( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== matches ) {
+      if ( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== matches ) {
         for( var i = 0; i < metaQuery._events[name].length; i++ ) {
           var fn = metaQuery._events[name][i];
           metaQuery._eventMatchCache[name] = matches;
@@ -63,7 +63,7 @@
   },
   
   collectMediaQueries = function () {
-    $('meta[name=breakpoint]').each( function () {
+    $( 'meta[name=breakpoint]' ).each( function () {
       var $el = $( this );
       metaQuery.breakpoints[$el.attr( 'data' )] = $el.attr( 'media' );
     });
