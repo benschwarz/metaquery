@@ -3,6 +3,10 @@
     breakpoints: {},
     _events: {},
     _eventMatchCache: {},
+    _globalEvents: [],
+    bindGlobal: function ( fn ) {
+      metaQuery._globalEvents.push( fn );
+    },
     bind: function ( name, fn ) {
       ( metaQuery._events[name] = [] ).push( fn );
 
@@ -106,6 +110,15 @@
 
           if ( typeof fn === 'function' ) { fn( matches ); }
         }
+
+      }
+
+      // call any global events
+      if ( matches ) {
+        for ( var i = 0; i < metaQuery._globalEvents.length; i++ ) {
+          var fn = metaQuery._globalEvents[i];
+          if ( typeof fn === 'function' ) { fn(); }
+        }
       }
 
       updateClasses( matches, name );
@@ -153,3 +166,4 @@
   readyState( onDomReady );
 
 }( this, this.document ));
+
