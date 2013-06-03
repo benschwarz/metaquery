@@ -73,6 +73,14 @@ metaQuery.bind( 'phone', function ( match ) {
 });
 ```
 
+and if you just want to fire an event whenever you switch breakpoints (but don't care which)
+
+``` javascript
+metaQuery.bindGlobal( function () {
+    // do something amazing because you've changed breakpoints!
+});
+```
+
 # Browser support
 
 metaQuery requires `matchMedia`: 
