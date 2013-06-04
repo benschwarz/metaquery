@@ -132,7 +132,7 @@
     // Add classes to the HTML node when a breakpoint matches
     for ( var i = 0; i < meta.length; i++ ) {
       if ( meta[i].name === 'breakpoint' ) {
-        var name = meta[i].getAttribute( 'data' ),
+        var name = meta[i].getAttribute( 'content' ),
             query = meta[i].getAttribute( 'media' );
 
         metaQuery.breakpoints[name] = query;

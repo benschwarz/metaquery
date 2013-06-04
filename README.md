@@ -30,11 +30,11 @@ The smaller (480 bytes!), lighter jQuery powered edition:
 * Define your breakpoints in `<meta>` tags.
 
 ``` html
-<meta name="breakpoint" data="phone" media="(max-width: 480px)">
-<meta name="breakpoint" data="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
-<meta name="breakpoint" data="tablet" media="(min-width: 600px) and (max-width: 1024px)">
-<meta name="breakpoint" data="widescreen" media="(min-width: 1024px)">
-<meta name="breakpoint" data="retina" media="only screen and (-webkit-min-device-pixel-ratio : 2)">
+<meta name="breakpoint" content="phone" media="(max-width: 480px)">
+<meta name="breakpoint" content="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
+<meta name="breakpoint" content="tablet" media="(min-width: 600px) and (max-width: 1024px)">
+<meta name="breakpoint" content="widescreen" media="(min-width: 1024px)">
+<meta name="breakpoint" content="retina" media="only screen and (-webkit-min-device-pixel-ratio : 2)">
 ```
 
 * metaQuery will add/remove classes to the `<html>` node (`.breakpoint-<name-of-breakpoint>`) for you to utilise when the breakpoints are matched. (shorter than media queries. don't repeat yourself)
