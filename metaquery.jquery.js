@@ -65,7 +65,7 @@
   collectMediaQueries = function () {
     $( 'meta[name=breakpoint]' ).each( function () {
       var $el = $( this );
-      metaQuery.breakpoints[$el.attr( 'data' )] = $el.attr( 'media' );
+      metaQuery.breakpoints[$el.attr( 'content' )] = $el.attr( 'media' );
     });
   },
 
