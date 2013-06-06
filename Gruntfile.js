@@ -1,13 +1,13 @@
 module.exports = function(grunt) {
-    
+
   // Project configuration.
-  grunt.initConfig({    
+  grunt.initConfig({
     min: {
       dist: {
         src: ['metaquery.js'],
         dest: 'metaquery.min.js'
       },
-      
+
       distjq: {
         src: ['metaquery.jquery.js'],
         dest: 'metaquery.jquery.min.js'
@@ -21,31 +21,17 @@ module.exports = function(grunt) {
     },
     watch: {
       files: '<config:lint.files>',
-      tasks: 'lint test'
+      tasks: 'jshint test'
     },
     jshint: {
-      options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true
-      },
-      globals: {
-        exports: true,
-        module: false
-      }
+      all: ['Gruntfile.js', 'metaquery.js', 'metaquery.jquery.js']
     },
     uglify: {}
   });
 
   // Default task.
-  grunt.registerTask('default', 'qunit lint min');
+  grunt.registerTask('default', ['qunit', 'jshint', 'min']);
 
   grunt.registerTask('travis', 'lint qunit');
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 };
