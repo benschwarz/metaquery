@@ -95,5 +95,5 @@
   preDomReady();
   $(function () {
     onDomReady();
-  })
+  });
 }( this, this.document, jQuery ));
