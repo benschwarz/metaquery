@@ -115,9 +115,9 @@
 
       // call any global events
       if ( matches ) {
-        for ( var i = 0; i < metaQuery._globalEvents.length; i++ ) {
-          var fn = metaQuery._globalEvents[i];
-          if ( typeof fn === 'function' ) { fn(); }
+        for ( var j = 0; j < metaQuery._globalEvents.length; j++ ) {
+          var gfn = metaQuery._globalEvents[j];
+          if ( typeof gfn === 'function' ) { gfn(); }
         }
       }
 
