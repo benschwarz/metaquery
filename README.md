@@ -63,9 +63,9 @@ Modernizr.load([{
 }]);
 ```
 
-## Adding your own javascript events with metaQuery.bind
+## Adding your own javascript events with metaQuery.onBreakpointChange
 
-Considering the HTML example above, say you wanted watch for breakpoint changes:
+Considering the HTML example above, say you wanted watch for 'phone' breakpoint changes:
 
 ``` javascript
 metaQuery.onBreakpointChange( 'phone', function ( match ) {
