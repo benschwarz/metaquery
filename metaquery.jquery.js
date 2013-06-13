@@ -15,10 +15,6 @@
         ( metaQuery._namedEvents[name] = [] ).push( fn );
       }
       mqChange();
-    },
-    // DEPRECATED 1.0 API, to be removed in 1.2
-    bind: function ( name, fn ) {
-      metaQuery.onBreakpointChange(name, fn);
     }
   },
 
