@@ -13,9 +13,9 @@ Install via Bower `bower install metaquery`
 
 Otherwise, if you want to grab it manually:
 
-Download the [production version][min] (691 bytes) or the [development version][max].
+Download the [production version][min] (1779 bytes) or the [development version][max].
 
-The smaller (480 bytes!), lighter jQuery powered edition:
+The smaller (968 bytes!), lighter jQuery powered edition:
 
 * [production jQuery version][minjq]
 * [development jQuery version][maxjq]
@@ -68,8 +68,16 @@ Modernizr.load([{
 Considering the HTML example above, say you wanted watch for breakpoint changes:
 
 ``` javascript
-metaQuery.bind( 'phone', function ( match ) {
+metaQuery.onBreakpointChange( 'phone', function ( match ) {
   if( match ) { // phawor! your media query matches. }
+});
+```
+
+and if you just want to fire an event whenever you switch breakpoints (but don't care which)
+
+``` javascript
+metaQuery.onBreakpointChange( function () {
+    // do something amazing because you've changed breakpoints!
 });
 ```
 
