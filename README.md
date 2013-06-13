@@ -13,9 +13,9 @@ Install via Bower `bower install metaquery`
 
 Otherwise, if you want to grab it manually:
 
-Download the [production version][min] (691 bytes) or the [development version][max].
+Download the [production version][min] (1779 bytes) or the [development version][max].
 
-The smaller (480 bytes!), lighter jQuery powered edition:
+The smaller (968 bytes!), lighter jQuery powered edition:
 
 * [production jQuery version][minjq]
 * [development jQuery version][maxjq]
