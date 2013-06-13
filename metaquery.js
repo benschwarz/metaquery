@@ -16,10 +16,9 @@
       }
       mqChange();
     },
+    // DEPRECATED 1.0 API, to be removed in 1.2
     bind: function ( name, fn ) {
-      // This is deprecated
-      //metaQuery.onBreakpointChange(name, fn);
-      ( metaQuery._namedEvents[name] = [] ).push( fn );
+      metaQuery.onBreakpointChange(name, fn);
     }
   },
 
