@@ -1,12 +1,24 @@
 (function ( window, document, $ ) {
   var metaQuery = {
     breakpoints: {},
-    _events: {},
+    _namedEvents: {},
     _eventMatchCache: {},
-    bind: function ( name, fn ) {
-      ( metaQuery._events[name] = [] ).push( fn );
-
+    _globalEvents: [],
+    onBreakpointChange: function () {
+      var args = Array.prototype.slice.call(arguments);
+      var fn = args.pop();
+      var name = args.pop();
+      console.log(name);
+      if ( typeof name === "undefined" ) {
+        metaQuery._globalEvents.push( fn );
+      } else {
+        ( metaQuery._namedEvents[name] = [] ).push( fn );
+      }
       mqChange();
+    },
+    // DEPRECATED 1.0 API, to be removed in 1.2
+    bind: function ( name, fn ) {
+      metaQuery.onBreakpointChange(name, fn);
     }
   },
 
@@ -48,12 +60,20 @@
           matches = window.matchMedia( query ).matches;
 
       // Call events bound to a given breakpoint
-      if ( metaQuery._events[name] && metaQuery._eventMatchCache[name] !== matches ) {
-        for( var i = 0; i < metaQuery._events[name].length; i++ ) {
-          var fn = metaQuery._events[name][i];
+      if ( metaQuery._namedEvents[name] && metaQuery._eventMatchCache[name] !== matches ) {
+        for( var i = 0; i < metaQuery._namedEvents[name].length; i++ ) {
+          var fn = metaQuery._namedEvents[name][i];
           metaQuery._eventMatchCache[name] = matches;
 
           if( typeof fn === 'function' ) { fn( matches ); }
+        }
+      }
+
+      // call any global events
+      if ( matches ) {
+        for ( var j = 0; j < metaQuery._globalEvents.length; j++ ) {
+          var gfn = metaQuery._globalEvents[j];
+          if ( typeof gfn === 'function' ) { gfn(); }
         }
       }
 
