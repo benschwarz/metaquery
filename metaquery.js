@@ -5,10 +5,10 @@
     _eventMatchCache: {},
     _globalEvents: [],
     onBreakpointChange: function () {
-      var args = Array.prototype.slice.call(arguments);
-      var fn = args.pop();
-      var name = args.pop();
-      console.log(name);
+      var args = Array.prototype.slice.call(arguments),
+            fn = args.pop(),
+            name = args.pop();
+
       if ( typeof name === "undefined" ) {
         metaQuery._globalEvents.push( fn );
       } else {
