@@ -68,7 +68,7 @@ Modernizr.load([{
 Considering the HTML example above, say you wanted watch for breakpoint changes:
 
 ``` javascript
-metaQuery.bind( 'phone', function ( match ) {
+metaQuery.onBreakpointChange( 'phone', function ( match ) {
   if( match ) { // phawor! your media query matches. }
 });
 ```
@@ -76,7 +76,7 @@ metaQuery.bind( 'phone', function ( match ) {
 and if you just want to fire an event whenever you switch breakpoints (but don't care which)
 
 ``` javascript
-metaQuery.bindGlobal( function () {
+metaQuery.onBreakpointChange( function () {
     // do something amazing because you've changed breakpoints!
 });
 ```
