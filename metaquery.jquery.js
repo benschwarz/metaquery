@@ -6,8 +6,8 @@
     _globalEvents: [],
     onBreakpointChange: function () {
       var args = Array.prototype.slice.call(arguments),
-            fn = args.pop(),
-            name = args.pop();
+          fn = args.pop(),
+          name = args.pop();
 
       if ( typeof name === "undefined" ) {
         metaQuery._globalEvents.push( fn );
