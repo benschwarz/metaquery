@@ -76,8 +76,11 @@ metaQuery.onBreakpointChange( 'phone', function ( match ) {
 and if you just want to fire an event whenever you switch breakpoints (but don't care which)
 
 ``` javascript
-metaQuery.onBreakpointChange( function () {
-    // do something amazing because you've changed breakpoints!
+metaQuery.onBreakpointChange( function ( match, breakpointName ) {
+  // match - Boolean
+  // breakpointName - String (the name of your breakpoint)
+
+  // do something amazing because you've changed breakpoints!
 });
 ```
 

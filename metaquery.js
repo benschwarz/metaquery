@@ -98,11 +98,9 @@
       }
 
       // call any global events
-      if ( matches ) {
-        for ( var j = 0; j < metaQuery._globalEvents.length; j++ ) {
-          var gfn = metaQuery._globalEvents[j];
-          if ( typeof gfn === 'function' ) { gfn(); }
-        }
+      for ( var j = 0; j < metaQuery._globalEvents.length; j++ ) {
+        var gfn = metaQuery._globalEvents[j];
+        if ( typeof gfn === 'function' ) { gfn( matches, name ); }
       }
 
       updateClasses( matches, name );
