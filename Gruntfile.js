@@ -10,7 +10,23 @@ module.exports = function(grunt) {
       tasks: 'jshint test'
     },
     jshint: {
-      all: ['Gruntfile.js', 'metaquery.js', 'metaquery.jquery.js']
+      all: ['metaquery.js', 'metaquery.jquery.js'],
+      options: {
+        "curly": true,
+        "eqeqeq": true,
+        "immed": true,
+        "latedef": true,
+        "newcap": true,
+        "noarg": true,
+        "sub": true,
+        "undef": true,
+        "boss": true,
+        "eqnull": true,
+        "globals": {
+          "jQuery": true,
+          "document": true
+        }
+      }
     },
     uglify: {
       options: {
