@@ -85,31 +85,20 @@
     });
   },
 
+  onDomReady = function () {
+    collectMediaQueries();
+    mqChange();
+  };
 
   // If the META tags are defined above this script,
   // we don't need to wait for domReady to set the breakpoint
   // class on the HTML element, fighting the FOUT.
-  preDomReady = function () {
-    collectMediaQueries();
+  onDomReady();
+
+  window['metaQuery'] = metaQuery;
+
+  $(function () { onDomReady(); });
+  $( window ).on( 'resize', debounce ( function () {
     mqChange();
-  },
-
-  // After domReady, we can be sure all our META and IMG tags
-  // are in the DOM.
-  onDomReady = function () {
-    collectMediaQueries();
-
-    $( window ).on( 'resize', debounce ( function () {
-      mqChange();
-    }, 50));
-
-    mqChange();
-  };
-
-  window.metaQuery = metaQuery;
-
-  preDomReady();
-  $(function () {
-    onDomReady();
-  });
+  }, 50));
 }( this, this.document, jQuery ));
