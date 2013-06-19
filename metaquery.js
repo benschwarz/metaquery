@@ -17,6 +17,7 @@
       mqChange();
     }
   },
+  metaTags = document.getElementsByTagName( 'meta' ),
 
   debounce = function( func, wait ) {
     var args,
@@ -109,13 +110,11 @@
   },
 
   collectMediaQueries = function () {
-    var meta = document.getElementsByTagName( 'meta' );
-
     // Add classes to the HTML node when a breakpoint matches
-    for ( var i = 0; i < meta.length; i++ ) {
-      if ( meta[i].name === 'breakpoint' ) {
-        var name = meta[i].getAttribute( 'content' ),
-            query = meta[i].getAttribute( 'media' );
+    for ( var i = 0; i < metaTags.length; i++ ) {
+      if ( metaTags[i].name === 'breakpoint' ) {
+        var name = metaTags[i].getAttribute( 'content' ),
+            query = metaTags[i].getAttribute( 'media' );
 
         metaQuery.breakpoints[name] = query;
       }
