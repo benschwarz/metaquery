@@ -18,26 +18,6 @@
     }
   },
 
-  // Pinched domready
-  // http://www.dustindiaz.com/smallest-domready-ever/
-  readyState = function ( fn ) {
-    if ( /in/.test( document.readyState ) ) {
-      window.setTimeout( function () {
-       readyState( fn );
-      }, 9 );
-    } else {
-      fn();
-    }
-  },
-
-  addEvent = function ( element, event, fn ) {
-    if ( document.addEventListener ) {
-      element.addEventListener( event, fn );
-    } else {
-      element.attachEvent( 'on' + event, fn );
-    }
-  },
-
   debounce = function( func, wait ) {
     var args,
         thisArg,
@@ -144,29 +124,20 @@
     }
   },
 
-  // If the META tags are defined above this script,
-  // we don't need to wait for domReady to set the breakpoint
-  // class on the HTML element, fighting the FOUT.
-  preDomReady = function () {
-    collectMediaQueries();
-    mqChange();
-  },
-
-  // After domReady, we can be sure all our META and IMG tags
-  // are in the DOM.
   onDomReady = function () {
     collectMediaQueries();
-
-    addEvent( window, 'resize', debounce( function () {
-      mqChange();
-    }, 50 ));
-
     mqChange();
   };
 
-  window.metaQuery = metaQuery;
+  // If the META tags are defined above this script,
+  // we don't need to wait for domReady to set the breakpoint
+  // class on the HTML element, fighting the FOUT.
+  onDomReady();
 
-  preDomReady();
-  readyState( onDomReady );
+  window['metaQuery'] = metaQuery;
+  window.addEventListener( 'DOMContentLoaded', onDomReady );
+  window.addEventListener( 'resize', debounce( function () {
+    mqChange();
+  }, 50 ));
 
 }( this, this.document ));
