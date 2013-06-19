@@ -116,7 +116,6 @@ Reviewers: Tim Lucas, Ben Alman, Jeremy Keith, Paul Irish, Divya Manian, David D
 Code:
 
 * Scott Jehl for writing picturefill, matchMedia.js (with Paul Irish) and respond.js. Legend.
-* Dustin Diaz's teeny dom ready.
 
 ## License
 Copyright (c) 2012 Ben Schwarz
