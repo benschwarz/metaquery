@@ -5,7 +5,7 @@
     _eventMatchCache: {},
     _globalEvents: [],
     onBreakpointChange: function () {
-      var args = Array.prototype.slice.call(arguments),
+      var args = Array.prototype.slice.call( arguments ),
           fn = args.pop(),
           name = args.pop();
 
