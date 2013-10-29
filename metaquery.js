@@ -74,19 +74,21 @@
     }
   },
 
-  updateClasses = function ( matches, name ) {
-    var breakpoint = 'breakpoint-' + name,
-        htmlNode = document.documentElement;
+  updateClasses = function ( matches ) {
+    var htmlNode = document.documentElement;
 
-    if ( matches ) {
-      addClass( htmlNode, breakpoint );
-    } else {
-      removeClass( htmlNode, breakpoint );
+    for ( var name in matches ) {
+      if ( matches[name] ) {
+        addClass( htmlNode, 'breakpoint-' + name );
+      } else {
+        removeClass( htmlNode, 'breakpoint-' + name );
+      }
     }
   },
 
-  updateElements = function ( matches, name ) {
+  updateElements = function ( matches ) {
     if ( !matches ) { return; }
+    var breakpoint = '';
 
     var elements = document.getElementsByTagName( 'img' );
 
@@ -95,13 +97,21 @@
           template = el.getAttribute( 'data-mq-src' );
 
       if ( template ) {
-        el.src = template.replace( '[breakpoint]', name );
+        for ( var name in matches ) {
+          if ( matches[name] ) {
+            breakpoint = breakpoint + name + '-';
+          }
+        }
+        breakpoint = breakpoint.slice( 0, -1 );
+        el.src = template.replace( '[breakpoint]', breakpoint );
       }
     }
   },
 
   // Called when a media query changes state
   mqChange = function () {
+    var breakpointMatches = {};
+
     for( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
           matches = window.matchMedia( query ).matches;
@@ -125,9 +135,10 @@
         }
       }
 
-      updateClasses( matches, name );
-      updateElements( matches, name );
+      breakpointMatches[name] = matches;
     }
+    updateClasses( breakpointMatches );
+    updateElements( breakpointMatches );
   },
 
   collectMediaQueries = function () {
