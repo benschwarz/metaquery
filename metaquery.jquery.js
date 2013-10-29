@@ -34,23 +34,35 @@
     };
   },
 
-  updateClasses = function ( matches, name ) {
-    $( 'html' ).toggleClass( 'breakpoint-' + name, matches );
+  updateClasses = function ( matches ) {
+    for ( var name in matches ) {
+      $( 'html' ).toggleClass( 'breakpoint-' + name, matches[name] );
+    }
   },
 
-  updateElements = function ( matches, name ) {
+  updateElements = function ( matches ) {
     if ( !matches ) { return; }
+    var breakpoint = '';
+
+    for ( var name in matches ) {
+      if ( matches[name] ) {
+        breakpoint = breakpoint + name + '-';
+      }
+    }
+    breakpoint = breakpoint.slice( 0, -1 );
 
     $( 'img[data-mq-src]' ).each(function () {
       var $img = $( this ),
           attr = $img.attr( 'data-mq-src');
 
-      $img.attr( 'src', attr.replace( '[breakpoint]', name ) );
+      $img.attr( 'src', attr.replace( '[breakpoint]', breakpoint ) );
     });
   },
 
   // Called when a media query changes state
   mqChange = function () {
+    var breakpointMatches = {};
+
     for ( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
           matches = window.matchMedia( query ).matches;
@@ -73,9 +85,10 @@
         }
       }
 
-      updateClasses( matches, name );
-      updateElements( matches, name );
+      breakpointMatches[name] = matches;
     }
+    updateClasses( breakpointMatches );
+    updateElements( breakpointMatches );
   },
 
   collectMediaQueries = function () {

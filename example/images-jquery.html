@@ -8,6 +8,7 @@
     <meta name="breakpoint" content="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
     <meta name="breakpoint" content="tablet" media="(min-width: 600px) and (max-width: 1024px)">
     <meta name="breakpoint" content="widescreen" media="(min-width: 1024px)">
+    <meta name="breakpoint" content="retina" media="only screen and (-moz-min-device-pixel-ratio: 1.25), only screen and (-o-min-device-pixel-ratio: 2.5/2), only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen  and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 1.25dppx)">
 
     <script src="./vendor/modernizr.js"></script>
     <style>
@@ -20,7 +21,7 @@
     <h2>A declarative breakpoint syntax.</h2>
     <p>The data-mq-src attribute on the image below is used as a template, replacing '[breakpoint]' with the named breakpoints as the breakpoints are entered</p>
     
-    <img src="./moon-phone.jpg" data-mq-src="./moon-[breakpoint].jpg">
+    <img src="./moon-phone.jpg" alt="moon" data-mq-src="./moon-[breakpoint].jpg">
     <script>
       Modernizr.load([
         {
