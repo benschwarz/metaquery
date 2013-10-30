@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="breakpoint" content="screen" media="screen">
+    <meta name="breakpoint" content="phone" media="(max-width: 480px)">
+    <meta name="breakpoint" content="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
+    <meta name="breakpoint" content="tablet" media="(min-width: 600px) and (max-width: 1024px)">
+    <meta name="breakpoint" content="widescreen" media="(min-width: 1024px)">
+    
+    <link rel="stylesheet" href="./qunit.css">
+  </head>
+  <body>
+    <img src="./images/noop.jpg" data-mq-src="./images/[breakpoint].jpg">
+
+    <div id="qunit"></div>
+  </body>
+  <script src="./jquery.min.js"></script>
+  <script src="./qunit.js"></script>
+  <script src="../metaquery.js"></script>
+  <script src="./unit-multiple-breakpoints.js"></script>
+</html>

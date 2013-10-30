@@ -74,43 +74,33 @@
     }
   },
 
-  updateClasses = function ( matches ) {
+  updateClasses = function ( validMatches, invalidMatches ) {
     var htmlNode = document.documentElement;
 
-    for ( var name in matches ) {
-      if ( matches[name] ) {
-        addClass( htmlNode, 'breakpoint-' + name );
-      } else {
-        removeClass( htmlNode, 'breakpoint-' + name );
-      }
+    for ( var v = 0; v < validMatches.length; v++ ) {
+      addClass( htmlNode, 'breakpoint-' + validMatches[v] );
+    }
+    for ( var i = 0; i < invalidMatches.length; i++ ) {
+      removeClass( htmlNode, 'breakpoint-' + invalidMatches[i] );
     }
   },
 
-  updateElements = function ( matches ) {
+  updateElements = function ( validMatches ) {
+    if (validMatches.length === 0) { return; }
+
     var breakpoint = '',
-        validMatches = {},
-        noMatches = true;
+        elements = document.getElementsByTagName( 'img' );
 
-    for ( var match in matches ) {
-      if ( matches[match] ) {
-        validMatches[match] = true;
-        noMatches = false;
-      }
+    for ( var v = 0; v < validMatches.length; v++ ) {
+      breakpoint = breakpoint + validMatches[v] + '-';
     }
-
-    if ( noMatches ) { return; }
-
-    var elements = document.getElementsByTagName( 'img' );
+    breakpoint = breakpoint.slice( 0, -1 );
 
     for ( var i = 0; i < elements.length; i++ ) {
       var el = elements[i],
           template = el.getAttribute( 'data-mq-src' );
 
       if ( template ) {
-        for ( var name in validMatches ) {
-          breakpoint = breakpoint + name + '-';
-        }
-        breakpoint = breakpoint.slice( 0, -1 );
         el.src = template.replace( '[breakpoint]', breakpoint );
       }
     }
@@ -118,9 +108,10 @@
 
   // Called when a media query changes state
   mqChange = function () {
-    var breakpointMatches = {};
+    var validMatches = [],
+        invalidMatches = [];
 
-    for( var name in metaQuery.breakpoints ) {
+    for ( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
           matches = window.matchMedia( query ).matches;
 
@@ -132,7 +123,6 @@
 
           if ( typeof fn === 'function' ) { fn( matches ); }
         }
-
       }
 
       // call any global events
@@ -141,12 +131,14 @@
           var gfn = metaQuery._globalEvents[j];
           if ( typeof gfn === 'function' ) { gfn(); }
         }
+        validMatches.push(name);
+      } else {
+        invalidMatches.push(name);
       }
 
-      breakpointMatches[name] = matches;
     }
-    updateClasses( breakpointMatches );
-    updateElements( breakpointMatches );
+    updateClasses( validMatches, invalidMatches );
+    updateElements( validMatches );
   },
 
   collectMediaQueries = function () {
