@@ -21,7 +21,10 @@
     <h2>A declarative breakpoint syntax.</h2>
     <p>The data-mq-src attribute on the image below is used as a template, replacing '[breakpoint]' with the named breakpoints as the breakpoints are entered</p>
     
-    <img src="./moon-phone.jpg" alt="moon" data-mq-src="./moon-[breakpoint].jpg">
+    <img alt="moon" data-mq-src="./moon-[breakpoint].jpg">
+    <noscript>
+      <img src="./moon-phone.jpg" alt="moon">
+    </noscript>
     <script>
       Modernizr.load([
         {

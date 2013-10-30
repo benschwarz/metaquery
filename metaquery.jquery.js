@@ -41,13 +41,21 @@
   },
 
   updateElements = function ( matches ) {
-    if ( !matches ) { return; }
-    var breakpoint = '';
+    var breakpoint = '',
+        validMatches = {},
+        noMatches = true;
 
-    for ( var name in matches ) {
-      if ( matches[name] ) {
-        breakpoint = breakpoint + name + '-';
+    for ( var match in matches ) {
+      if ( matches[match] ) {
+        validMatches[match] = true;
+        noMatches = false;
       }
+    }
+
+    if ( noMatches ) { return; }
+
+    for ( var name in validMatches ) {
+      breakpoint = breakpoint + name + '-';
     }
     breakpoint = breakpoint.slice( 0, -1 );
 
