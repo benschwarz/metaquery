@@ -34,23 +34,38 @@
     };
   },
 
-  updateClasses = function ( matches, name ) {
-    $( 'html' ).toggleClass( 'breakpoint-' + name, matches );
+  updateClasses = function ( validMatches, invalidMatches ) {
+    for ( var v = 0; v < validMatches.length; v++ ) {
+      $( 'html' ).toggleClass( 'breakpoint-' + validMatches[v], true );
+    }
+    for ( var i = 0; i < invalidMatches.length; i++ ) {
+      $( 'html' ).toggleClass( 'breakpoint-' + invalidMatches[i], false );
+    }
   },
 
-  updateElements = function ( matches, name ) {
-    if ( !matches ) { return; }
+  updateElements = function ( validMatches ) {
+    if (validMatches.length === 0) { return; }
+
+    var breakpoint = '';
+
+    for ( var v = 0; v < validMatches.length; v++ ) {
+      breakpoint = breakpoint + validMatches[v] + '-';
+    }
+    breakpoint = breakpoint.slice( 0, -1 );
 
     $( 'img[data-mq-src]' ).each(function () {
       var $img = $( this ),
           attr = $img.attr( 'data-mq-src');
 
-      $img.attr( 'src', attr.replace( '[breakpoint]', name ) );
+      $img.attr( 'src', attr.replace( '[breakpoint]', breakpoint ) );
     });
   },
 
   // Called when a media query changes state
   mqChange = function () {
+    var validMatches = [],
+        invalidMatches = [];
+
     for ( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
           matches = window.matchMedia( query ).matches;
@@ -71,11 +86,14 @@
           var gfn = metaQuery._globalEvents[j];
           if ( typeof gfn === 'function' ) { gfn(); }
         }
+        validMatches.push(name);
+      } else {
+        invalidMatches.push(name);
       }
 
-      updateClasses( matches, name );
-      updateElements( matches, name );
     }
+    updateClasses( validMatches, invalidMatches );
+    updateElements( validMatches );
   },
 
   collectMediaQueries = function () {

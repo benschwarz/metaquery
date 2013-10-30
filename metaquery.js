@@ -74,35 +74,44 @@
     }
   },
 
-  updateClasses = function ( matches, name ) {
-    var breakpoint = 'breakpoint-' + name,
-        htmlNode = document.documentElement;
+  updateClasses = function ( validMatches, invalidMatches ) {
+    var htmlNode = document.documentElement;
 
-    if ( matches ) {
-      addClass( htmlNode, breakpoint );
-    } else {
-      removeClass( htmlNode, breakpoint );
+    for ( var v = 0; v < validMatches.length; v++ ) {
+      addClass( htmlNode, 'breakpoint-' + validMatches[v] );
+    }
+    for ( var i = 0; i < invalidMatches.length; i++ ) {
+      removeClass( htmlNode, 'breakpoint-' + invalidMatches[i] );
     }
   },
 
-  updateElements = function ( matches, name ) {
-    if ( !matches ) { return; }
+  updateElements = function ( validMatches ) {
+    if (validMatches.length === 0) { return; }
 
-    var elements = document.getElementsByTagName( 'img' );
+    var breakpoint = '',
+        elements = document.getElementsByTagName( 'img' );
+
+    for ( var v = 0; v < validMatches.length; v++ ) {
+      breakpoint = breakpoint + validMatches[v] + '-';
+    }
+    breakpoint = breakpoint.slice( 0, -1 );
 
     for ( var i = 0; i < elements.length; i++ ) {
       var el = elements[i],
           template = el.getAttribute( 'data-mq-src' );
 
       if ( template ) {
-        el.src = template.replace( '[breakpoint]', name );
+        el.src = template.replace( '[breakpoint]', breakpoint );
       }
     }
   },
 
   // Called when a media query changes state
   mqChange = function () {
-    for( var name in metaQuery.breakpoints ) {
+    var validMatches = [],
+        invalidMatches = [];
+
+    for ( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
           matches = window.matchMedia( query ).matches;
 
@@ -114,7 +123,6 @@
 
           if ( typeof fn === 'function' ) { fn( matches ); }
         }
-
       }
 
       // call any global events
@@ -123,11 +131,14 @@
           var gfn = metaQuery._globalEvents[j];
           if ( typeof gfn === 'function' ) { gfn(); }
         }
+        validMatches.push(name);
+      } else {
+        invalidMatches.push(name);
       }
 
-      updateClasses( matches, name );
-      updateElements( matches, name );
     }
+    updateClasses( validMatches, invalidMatches );
+    updateElements( validMatches );
   },
 
   collectMediaQueries = function () {
