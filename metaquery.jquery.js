@@ -57,9 +57,9 @@
 
       // Call events bound to a given breakpoint
       if ( metaQuery._namedEvents[name] && metaQuery._eventMatchCache[name] !== matches ) {
+        metaQuery._eventMatchCache[name] = matches;
         for( var i = 0; i < metaQuery._namedEvents[name].length; i++ ) {
           var fn = metaQuery._namedEvents[name][i];
-          metaQuery._eventMatchCache[name] = matches;
 
           if( typeof fn === 'function' ) { fn( matches ); }
         }
