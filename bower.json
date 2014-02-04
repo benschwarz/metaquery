@@ -1,7 +1,7 @@
 {
   "name": "metaquery",
   "version": "1.1.1",
-  "main": ["metaquery.min.js", "metaquery.jquery.min.js"],
+  "main": ["metaquery.min.js"],
   "ignore": [
     "**/.*",
     "node_modules",
