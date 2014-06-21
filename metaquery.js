@@ -137,7 +137,7 @@
     // call any global events
     if ( activeBreakpoints.length !== 0 ) {
       callGlobalEvents( activeBreakpoints );
-    };
+    }
   },
 
   collectMediaQueries = function () {
