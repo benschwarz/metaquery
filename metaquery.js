@@ -100,8 +100,17 @@
     }
   },
 
+  callGlobalEvents = function( activeBreakpoints ) {
+    for ( var j = 0; j < metaQuery._globalEvents.length; j++ ) {
+      var gfn = metaQuery._globalEvents[j];
+      if ( typeof gfn === 'function' ) { gfn(activeBreakpoints); }
+    }
+  },
+
   // Called when a media query changes state
   mqChange = function () {
+    var activeBreakpoints = [];
+
     for( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
           matches = window.matchMedia( query ).matches;
@@ -114,20 +123,21 @@
 
           if ( typeof fn === 'function' ) { fn( matches ); }
         }
-
       }
 
-      // call any global events
+      // store the matching mq
       if ( matches ) {
-        for ( var j = 0; j < metaQuery._globalEvents.length; j++ ) {
-          var gfn = metaQuery._globalEvents[j];
-          if ( typeof gfn === 'function' ) { gfn(); }
-        }
+        activeBreakpoints.push(name);
       }
 
       updateClasses( matches, name );
       updateElements( matches, name );
     }
+
+    // call any global events
+    if ( activeBreakpoints.length !== 0 ) {
+      callGlobalEvents( activeBreakpoints );
+    };
   },
 
   collectMediaQueries = function () {

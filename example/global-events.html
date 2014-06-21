@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="breakpoint" content="phone" media="(max-width: 480px)">
+    <meta name="breakpoint" content="small-tablet" media="(min-width: 480px) and (max-width: 600px)">
+    <meta name="breakpoint" content="tablet" media="(min-width: 600px) and (max-width: 1024px)">
+    <meta name="breakpoint" content="widescreen" media="(min-width: 1024px)">
+
+    <script src="./vendor/modernizr.js"></script>
+
+    <style>
+      body { background-size: cover; margin: 0; padding: 50px; }
+
+      .breakpoint-phone body { background-color: #F5DC25; color: black; }
+      .breakpoint-small-tablet body { background-color: #E38C28; color: white; }
+      .breakpoint-tablet body { background-color: #DC563B; color: white; }
+      .breakpoint-widescreen body { background-color: #72244B; color: white; }
+    </style>
+  </head>
+  <body>
+    <script>
+      Modernizr.load([
+        {
+          test: (!!window.matchMedia),
+          nope: ['./vendor/matchMedia-oldie.js']
+        },
+        {
+          load: '../metaquery.js',
+          complete: function() {
+            metaQuery.onBreakpointChange( function (activeBreakpoints) {
+              document.body.innerHTML = activeBreakpoints.join(', ');
+            });
+          }
+        }
+      ]);
+    </script>
+  </body>
+</html>
