@@ -1,6 +1,7 @@
 (function ( window, document ) {
   var metaQuery = {
     breakpoints: {},
+    _isTicking: false,
     _namedEvents: {},
     _eventMatchCache: {},
     _globalEvents: [],
@@ -107,8 +108,16 @@
     }
   },
 
+  requestMqChange = function() {
+    if( !metaQuery._isTicking ) {
+      requestAnimationFrame(mqChange);
+    }
+    metaQuery._isTicking = true;
+  },
+
   // Called when a media query changes state
   mqChange = function () {
+    metaQuery._isTicking = false;
     var activeBreakpoints = [];
 
     for( var name in metaQuery.breakpoints ) {
@@ -167,9 +176,7 @@
   onDomReady = function () {
     collectMediaQueries();
 
-    addEvent( window, 'resize', debounce( function () {
-      mqChange();
-    }, 50 ));
+    addEvent( window, 'resize', requestMqChange);
 
     mqChange();
   };
