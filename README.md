@@ -84,7 +84,7 @@ Otherwise, metaQuery will work with all common desktop and mobile browsers.
 
 ## Backstory
 
-In 2011/12 on a large HTML magazine that is edited by an editorial team. Each 'module' of a template is responsive, and requires unique styles and sometimes even scripts. After reflecting on the project for some time, what worked and what didn't, I made some simple observations:
+In 2011/12 I worked on a large HTML magazine that is edited by an editorial team. Each 'module' of a template is responsive, and requires unique styles and sometimes even scripts. After reflecting on the project for some time, what worked and what didn't, I made some simple observations:
 
 * Writing media queries over and over again sucks. (Even though I use [the technique][responsive-design-with-sass] that I illustrated back in December 11')
 * If you want media query access in javascript, you'll create yet another media query with `matchMedia`
