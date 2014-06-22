@@ -1,6 +1,8 @@
 (function ( window, document ) {
   var metaQuery = {
     breakpoints: {},
+    _isTicking: false,
+    _debounceLastTime: 0,
     _namedEvents: {},
     _eventMatchCache: {},
     _globalEvents: [],
@@ -36,22 +38,6 @@
     } else {
       element.attachEvent( 'on' + event, fn );
     }
-  },
-
-  debounce = function( func, wait ) {
-    var args,
-        thisArg,
-        timeoutId;
-
-    function delayed() {
-      timeoutId = null;
-      func.apply( thisArg, args );
-    }
-
-    return function() {
-      window.clearTimeout( timeoutId );
-      timeoutId = window.setTimeout( delayed, wait );
-    };
   },
 
   hasClass = function( element, className ) {
@@ -107,8 +93,29 @@
     }
   },
 
+  requestMqChange = function() {
+    if( !metaQuery._isTicking ) {
+      requestAnimationFrame(mqChange);
+    }
+    metaQuery._isTicking = true;
+  },
+
+  // A rAF fallback, adpated from https://gist.github.com/paulirish/1579671
+  requestAnimationFrame = function(callback, element) {
+    if ( !window.requestAnimationFrame ) {
+      var currTime = new Date().getTime();
+      var timeToCall = Math.max(0, 16 - (currTime - metaQuery._debounceLastTime));
+      var id = window.setTimeout(function() {  callback(currTime + timeToCall); }, timeToCall);
+      metaQuery._debounceLastTime = currTime + timeToCall;
+      return id;
+    } else {
+      window.requestAnimationFrame(callback, element);
+    }
+  },
+
   // Called when a media query changes state
   mqChange = function () {
+    metaQuery._isTicking = false;
     var activeBreakpoints = [];
 
     for( var name in metaQuery.breakpoints ) {
@@ -166,11 +173,7 @@
   // are in the DOM.
   onDomReady = function () {
     collectMediaQueries();
-
-    addEvent( window, 'resize', debounce( function () {
-      mqChange();
-    }, 50 ));
-
+    addEvent( window, 'resize', requestMqChange);
     mqChange();
   };
 

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="breakpoint" content="one"    media="(max-width: 300px)">
+    <meta name="breakpoint" content="two"    media="(min-width: 300px) and (max-width: 400px)">
+    <meta name="breakpoint" content="three"  media="(min-width: 400px) and (max-width: 500px)">
+    <meta name="breakpoint" content="four"   media="(min-width: 500px) and (max-width: 600px)">
+    <meta name="breakpoint" content="five"   media="(min-width: 600px) and (max-width: 700px)">
+    <meta name="breakpoint" content="six"    media="(min-width: 700px) and (max-width: 800px)">
+    <meta name="breakpoint" content="seven"  media="(min-width: 800px) and (max-width: 900px)">
+    <meta name="breakpoint" content="eight"  media="(min-width: 900px) and (max-width: 1000px)">
+    <meta name="breakpoint" content="nine"   media="(min-width: 1000px) and (max-width: 1100px)">
+    <meta name="breakpoint" content="ten"    media="(min-width: 1100px) and (max-width: 1200px)">
+    <meta name="breakpoint" content="eleven" media="(min-width: 1200px) and (max-width: 1300px)">
+    <meta name="breakpoint" content="twelve" media="(min-width: 1300px) and (max-width: 1400px)">
+
+    <script src="./vendor/modernizr.js"></script>
+
+    <style>
+      body { background-size: cover; margin: 0; padding: 50px; color: white; }
+
+      .breakpoint-one body    { background-color: #001F3F; }
+      .breakpoint-two body    { background-color: #0074D9; }
+      .breakpoint-three body  { background-color: #7FDBFF; }
+      .breakpoint-four body   { background-color: #39CCCC; }
+      .breakpoint-five body   { background-color: #3D9970; }
+      .breakpoint-six body    { background-color: #2ECC40; }
+      .breakpoint-seven body  { background-color: #01FF70; }
+      .breakpoint-eight body  { background-color: #FFDC00; }
+      .breakpoint-nine body   { background-color: #FF851B; }
+      .breakpoint-ten body    { background-color: #FF4136; }
+      .breakpoint-eleven body { background-color: #85144B; }
+      .breakpoint-twelve body { background-color: #F012BE; }
+    </style>
+  </head>
+  <body>
+    <script>
+      Modernizr.load([
+        {
+          test: (!!window.matchMedia),
+          nope: ['./vendor/matchMedia-oldie.js']
+        },
+        {
+          load: './metaquery.js'
+        }
+      ]);
+    </script>
+  </body>
+</html>
