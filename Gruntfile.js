@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       tasks: 'jshint test'
     },
     jshint: {
-      all: ['Gruntfile.js', 'metaquery.js', 'metaquery.jquery.js']
+      all: ['Gruntfile.js', 'metaquery.js']
     },
     uglify: {
       options: {
@@ -18,8 +18,7 @@ module.exports = function(grunt) {
       },
       std: {
         files: {
-          'metaquery.min.js' : 'metaquery.js',
-          'metaquery.jquery.min.js' : 'metaquery.jquery.js'
+          'metaquery.min.js' : 'metaquery.js'
         }
       }
     }

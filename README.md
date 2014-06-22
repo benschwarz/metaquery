@@ -15,16 +15,8 @@ Otherwise, if you want to grab it manually:
 
 Download the [production version][min] (1779 bytes) or the [development version][max].
 
-The smaller (968 bytes!), lighter jQuery powered edition:
-
-* [production jQuery version][minjq]
-* [development jQuery version][maxjq]
-
 [min]: https://raw.github.com/benschwarz/metaquery/master/metaquery.min.js
 [max]: https://raw.github.com/benschwarz/metaquery/master/metaquery.js
-[minjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.min.js
-[maxjq]: https://raw.github.com/benschwarz/metaquery/master/metaquery.jquery.js
-
 ---
 
 * Define your breakpoints in `<meta>` tags.
