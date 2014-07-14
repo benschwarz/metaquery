@@ -40,22 +40,18 @@
     }
   },
 
-  hasClass = function( element, className ) {
-    return element.className.split(' ').indexOf( className ) !== -1;
-  },
-
   removeClass = function( element, className ) {
     var classes = element.className.split( ' ' ),
-        id = classes.indexOf( className );
+        index = classes.indexOf( className );
 
-    if ( hasClass( element, className ) ) {
-      classes.splice( id, 1 );
+    if ( index > -1 ) {
+      classes.splice( index, 1 );
       element.className = classes.join( ' ' );
     }
   },
 
   addClass = function(element, className) {
-    if ( !hasClass( element, className ) ) {
+    if ( element.className.indexOf(className) === -1 ) {
       element.className = ( element.className !== '' ) ? ( element.className + ' ' + className ) : className;
     }
   },
