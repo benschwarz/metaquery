@@ -1,5 +1,5 @@
 (function ( window, document, metaQuery ) {
-  if (!metaQuery) return;
+  if ( !metaQuery ) return;
 
   function updateElements ( matches ) {
     if ( !matches || !matches.length ) { return; }
@@ -17,6 +17,6 @@
   }
 
   metaQuery.onBreakpointChange( function (activeBreakpoints) {
-    updateElements(activeBreakpoints);
+    updateElements( activeBreakpoints );
   });
-}(window, window.document, window.metaQuery));
+}( window, window.document, window.metaQuery ));
