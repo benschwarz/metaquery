@@ -155,4 +155,4 @@
   preDomReady();
   readyState( onDomReady );
 
-}( this, this.document ));
+}( window, window.document ));
