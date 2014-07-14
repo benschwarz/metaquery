@@ -32,14 +32,6 @@
     }
   },
 
-  addEvent = function ( element, event, fn ) {
-    if ( document.addEventListener ) {
-      element.addEventListener( event, fn );
-    } else {
-      element.attachEvent( 'on' + event, fn );
-    }
-  },
-
   removeClass = function( element, className ) {
     var classes = element.className.split( ' ' ),
         index = classes.indexOf( className );
@@ -68,10 +60,9 @@
   },
 
   callGlobalEvents = function( activeBreakpoints ) {
-    for ( var j = 0; j < metaQuery._globalEvents.length; j++ ) {
-      var gfn = metaQuery._globalEvents[j];
+    metaQuery._globalEvents.forEach(function(gfn) {
       if ( typeof gfn === 'function' ) { gfn(activeBreakpoints); }
-    }
+    });
   },
 
   requestMqChange = function() {
@@ -153,7 +144,7 @@
   // are in the DOM.
   onDomReady = function () {
     collectMediaQueries();
-    addEvent( window, 'resize', requestMqChange);
+    window.addEventListener('resize', requestMqChange);
     mqChange();
   };
 
