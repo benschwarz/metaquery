@@ -60,10 +60,9 @@
   },
 
   callGlobalEvents = function( activeBreakpoints ) {
-    for ( var j = 0; j < metaQuery._globalEvents.length; j++ ) {
-      var gfn = metaQuery._globalEvents[j];
-      if ( typeof gfn === 'function' ) { gfn( activeBreakpoints ); }
-    }
+    metaQuery._globalEvents.forEach(function(gfn) {
+      if ( typeof gfn === 'function' ) { gfn(activeBreakpoints); }
+    });
   },
 
   requestMqChange = function() {
@@ -75,14 +74,18 @@
 
   // A rAF fallback, adapted from https://gist.github.com/paulirish/1579671
   requestAnimationFrame = function( callback, element ) {
-    if ( !window.requestAnimationFrame ) {
+    if ( window.requestAnimationFrame ) {
+      window.requestAnimationFrame( callback, element );
+    } else {
       var currTime = new Date().getTime();
       var timeToCall = Math.max( 0, 16 - ( currTime - metaQuery._debounceLastTime ) );
-      var id = window.setTimeout(function() {  callback( currTime + timeToCall ); }, timeToCall );
+      var id = window.setTimeout(function () {
+        callback( currTime + timeToCall );
+      }, timeToCall );
+
       metaQuery._debounceLastTime = currTime + timeToCall;
+
       return id;
-    } else {
-      window.requestAnimationFrame( callback, element );
     }
   },
 

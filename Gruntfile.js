@@ -18,7 +18,8 @@ module.exports = function(grunt) {
       },
       std: {
         files: {
-          'metaquery.min.js' : 'metaquery.js'
+          'metaquery.min.js' : 'metaquery.js',
+          'metaquery-images.min.js' : 'metaquery-images.js'
         }
       }
     }
