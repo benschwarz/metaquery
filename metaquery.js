@@ -40,22 +40,18 @@
     }
   },
 
-  hasClass = function( element, className ) {
-    return element.className.split(' ').indexOf( className ) !== -1;
-  },
-
   removeClass = function( element, className ) {
     var classes = element.className.split( ' ' ),
-        id = classes.indexOf( className );
+        index = classes.indexOf( className );
 
-    if ( hasClass( element, className ) ) {
-      classes.splice( id, 1 );
+    if ( index > -1 ) {
+      classes.splice( index, 1 );
       element.className = classes.join( ' ' );
     }
   },
 
   addClass = function(element, className) {
-    if ( !hasClass( element, className ) ) {
+    if ( element.className.indexOf(className) === -1 ) {
       element.className = ( element.className !== '' ) ? ( element.className + ' ' + className ) : className;
     }
   },
@@ -68,21 +64,6 @@
       addClass( htmlNode, breakpoint );
     } else {
       removeClass( htmlNode, breakpoint );
-    }
-  },
-
-  updateElements = function ( matches, name ) {
-    if ( !matches ) { return; }
-
-    var elements = document.getElementsByTagName( 'img' );
-
-    for ( var i = 0; i < elements.length; i++ ) {
-      var el = elements[i],
-          template = el.getAttribute( 'data-mq-src' );
-
-      if ( template ) {
-        el.src = template.replace( '[breakpoint]', name );
-      }
     }
   },
 
@@ -100,7 +81,7 @@
     metaQuery._isTicking = true;
   },
 
-  // A rAF fallback, adpated from https://gist.github.com/paulirish/1579671
+  // A rAF fallback, adapted from https://gist.github.com/paulirish/1579671
   requestAnimationFrame = function(callback, element) {
     if ( !window.requestAnimationFrame ) {
       var currTime = new Date().getTime();
@@ -138,7 +119,6 @@
       }
 
       updateClasses( matches, name );
-      updateElements( matches, name );
     }
 
     // call any global events
