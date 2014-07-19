@@ -13,7 +13,7 @@ Install via Bower `bower install metaquery`
 
 Otherwise, if you want to grab it manually:
 
-Download the [production version][min] (474 bytes) or the [development version][max].
+Download the [production version][min] (416 bytes) or the [development version][max].
 
 [min]: https://raw.github.com/benschwarz/metaquery/master/metaquery.min.js
 [max]: https://raw.github.com/benschwarz/metaquery/master/metaquery.js
