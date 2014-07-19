@@ -7,7 +7,7 @@
     _eventMatchCache: {},
     _globalEvents: [],
     onBreakpointChange: function () {
-      var args = Array.prototype.slice.call(arguments),
+      var args = Array.prototype.slice.call( arguments ),
             fn = args.pop(),
             name = args.pop();
 
@@ -17,18 +17,6 @@
         ( metaQuery._namedEvents[name] = [] ).push( fn );
       }
       mqChange();
-    }
-  },
-
-  // Pinched domready
-  // http://www.dustindiaz.com/smallest-domready-ever/
-  readyState = function ( fn ) {
-    if ( /in/.test( document.readyState ) ) {
-      window.setTimeout( function () {
-       readyState( fn );
-      }, 9 );
-    } else {
-      fn();
     }
   },
 
@@ -70,27 +58,27 @@
   callGlobalEvents = function( activeBreakpoints ) {
     for ( var j = 0; j < metaQuery._globalEvents.length; j++ ) {
       var gfn = metaQuery._globalEvents[j];
-      if ( typeof gfn === 'function' ) { gfn(activeBreakpoints); }
+      if ( typeof gfn === 'function' ) { gfn( activeBreakpoints ); }
     }
   },
 
   requestMqChange = function() {
     if( !metaQuery._isTicking ) {
-      requestAnimationFrame(mqChange);
+      requestAnimationFrame( mqChange );
     }
     metaQuery._isTicking = true;
   },
 
   // A rAF fallback, adapted from https://gist.github.com/paulirish/1579671
-  requestAnimationFrame = function(callback, element) {
+  requestAnimationFrame = function( callback, element ) {
     if ( !window.requestAnimationFrame ) {
       var currTime = new Date().getTime();
-      var timeToCall = Math.max(0, 16 - (currTime - metaQuery._debounceLastTime));
-      var id = window.setTimeout(function() {  callback(currTime + timeToCall); }, timeToCall);
+      var timeToCall = Math.max( 0, 16 - ( currTime - metaQuery._debounceLastTime ) );
+      var id = window.setTimeout(function() {  callback( currTime + timeToCall ); }, timeToCall );
       metaQuery._debounceLastTime = currTime + timeToCall;
       return id;
     } else {
-      window.requestAnimationFrame(callback, element);
+      window.requestAnimationFrame( callback, element );
     }
   },
 
@@ -115,7 +103,7 @@
 
       // store the matching mq
       if ( matches ) {
-        activeBreakpoints.push(name);
+        activeBreakpoints.push( name );
       }
 
       updateClasses( matches, name );
@@ -160,6 +148,6 @@
   window.metaQuery = metaQuery;
 
   preDomReady();
-  readyState( onDomReady );
+  document.addEventListener( 'DOMContentLoaded', onDomReady );
 
 }( this, this.document ));
