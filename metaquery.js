@@ -20,11 +20,15 @@
     }
   },
 
-  addEvent = function ( element, event, fn ) {
-    if ( document.addEventListener ) {
-      element.addEventListener( event, fn );
+  // Pinched domready
+  // http://www.dustindiaz.com/smallest-domready-ever/
+  readyState = function ( fn ) {
+    if ( /in/.test( document.readyState ) ) {
+      window.setTimeout( function () {
+        readyState( fn );
+      }, 9 );
     } else {
-      element.attachEvent( 'on' + event, fn );
+      fn();
     }
   },
 
@@ -141,13 +145,13 @@
   // are in the DOM.
   onDomReady = function () {
     collectMediaQueries();
-    addEvent( window, 'resize', requestMqChange);
     mqChange();
+    window.addEventListener( 'resize', requestMqChange );
   };
 
-  window.metaQuery = ( window.module || {} ).exports = metaQuery;
+  window.metaQuery = ( module || {} ).exports = metaQuery;
 
   preDomReady();
-  document.addEventListener( 'DOMContentLoaded', onDomReady );
+  readyState( onDomReady );
 
-}( this, this.document ));
+}( window, document ));
