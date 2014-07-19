@@ -145,7 +145,7 @@
     mqChange();
   };
 
-  window.metaQuery = metaQuery;
+  window.metaQuery = ( window.module || {} ).exports = metaQuery;
 
   preDomReady();
   document.addEventListener( 'DOMContentLoaded', onDomReady );
