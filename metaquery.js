@@ -152,7 +152,7 @@
     window.addEventListener( 'resize', requestMqChange );
   };
 
-  window.metaQuery = ( module || {} ).exports = metaQuery;
+  window.metaQuery = ( window.module || {} ).exports = metaQuery;
 
   preDomReady();
   readyState( onDomReady );
