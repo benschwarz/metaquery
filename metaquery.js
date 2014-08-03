@@ -1,4 +1,6 @@
 (function ( window, document ) {
+  "use strict";
+
   var metaQuery = {
     breakpoints: {},
     _isTicking: false,
@@ -152,7 +154,11 @@
     window.addEventListener( 'resize', requestMqChange );
   };
 
-  window.metaQuery = ( module || {} ).exports = metaQuery;
+  if ( typeof module !== 'undefined' && module.exports ) {
+    module.exports = metaQuery;
+  } else {
+    window.metaQuery = metaQuery;
+  }
 
   preDomReady();
   readyState( onDomReady );

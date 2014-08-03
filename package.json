@@ -4,6 +4,7 @@
   "description": "A declarative responsive web design syntax. Breakpoints, defined in `<meta>` ",
   "version": "1.0.0",
   "homepage": "https://github.com/benschwarz/metaquery",
+  "main": "metaquery.min.js",
   "author": {
     "name": "Ben Schwarz",
     "email": "ben@germanforblack.com",
