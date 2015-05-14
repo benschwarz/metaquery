@@ -3,6 +3,7 @@
 
   var metaQuery = {
     breakpoints: {},
+    activeBreakpoints: [],
     _isTicking: false,
     _debounceLastTime: 0,
     _namedEvents: {},
@@ -94,7 +95,7 @@
   // Called when a media query changes state
   mqChange = function () {
     metaQuery._isTicking = false;
-    var activeBreakpoints = [];
+    metaQuery.activeBreakpoints = [];
 
     for( var name in metaQuery.breakpoints ) {
       var query = metaQuery.breakpoints[name],
@@ -112,15 +113,15 @@
 
       // store the matching mq
       if ( matches ) {
-        activeBreakpoints.push( name );
+        metaQuery.activeBreakpoints.push( name );
       }
 
       updateClasses( matches, name );
     }
 
     // call any global events
-    if ( activeBreakpoints.length !== 0 ) {
-      callGlobalEvents( activeBreakpoints );
+    if ( metaQuery.activeBreakpoints.length !== 0 ) {
+      callGlobalEvents( metaQuery.activeBreakpoints );
     }
   },
 
