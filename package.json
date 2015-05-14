@@ -2,7 +2,7 @@
   "name": "metaquery",
   "title": "metaquery",
   "description": "A declarative responsive web design syntax. Breakpoints, defined in `<meta>` ",
-  "version": "1.2.5",
+  "version": "1.3.0",
   "homepage": "https://github.com/benschwarz/metaquery",
   "main": "metaquery.min.js",
   "author": "Ben Schwarz <ben@germanforblack.com> (http://germanforblack.com/)",
