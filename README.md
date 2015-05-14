@@ -74,6 +74,12 @@ metaQuery.onBreakpointChange( function (activeBreakpoints) {
 });
 ```
 
+You can also access the currently active breakpoints at any time:
+
+``` javascript
+console.log(metaQuery.activeBreakpoints); // ['phone', 'small-tablet']
+```
+
 # Browser support
 
 metaQuery requires `matchMedia`:

@@ -12,6 +12,10 @@ test( 'class added', function () {
   equal( $( window.document.documentElement ).hasClass( 'breakpoint-phone' ), true );
 });
 
+test( 'active breakpoint added to activeBreakpoints', function () {
+  notEqual( window.metaQuery.activeBreakpoints.indexOf( "phone" ), -1 );
+});
+
 test( 'image source set', function () {
   equal( $( 'img[src]' ).attr( 'src' ), './images/phone.jpg' );
 });
